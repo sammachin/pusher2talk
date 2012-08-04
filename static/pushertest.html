@@ -35,10 +35,9 @@ function bind_event(){
 }
 
 function ptt_on(){		
-	channel.bind('pusher:subscription_succeeded', function() {
-  		var triggered = channel.trigger('client-talk', { "user" : "TestUser" });
-	});
+	channel.trigger('client-talk', { "user" : "TestUser" });
 }
+
 function ptt_off(){
 	channel.bind('pusher:subscription_succeeded', function() {
   		var triggered = channel.trigger('client-stop', { "user" : "TestUser" });
