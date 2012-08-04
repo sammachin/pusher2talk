@@ -52,6 +52,8 @@ function ptt_off(){
 
     Twilio.Device.setup('{{token}}');
 
+	Twilio.Device.sounds.outgoing(false)
+
     Twilio.Device.ready(function (device) {
         $("#log").text("Ready");
     });
