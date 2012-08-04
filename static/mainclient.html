@@ -25,6 +25,20 @@
 			sound.Play();
 			 }
 	);
+	channel.bind('join', function(data) {
+			var container = document.getElementById('roster');
+			var new_element = document.createElement('li');
+			new_element.setAttribute("id", data.user);
+			new_element.innerHTML = data.user;
+			container.insertBefore(new_element, container.firstChild);
+			 }
+	);
+	channel.bind('leave', function(data) {
+			return (elem=document.getElementById(data.user)).parentNode.removeChild(elem);
+			 }
+	);
+	
+	
 	
 
     Twilio.Device.setup('{{token}}');
@@ -78,6 +92,7 @@ function ptt_off(){
 }
 
 
+
 </script>
 
 </head>
@@ -87,6 +102,9 @@ function ptt_off(){
 <div id="room"></div><br>
 <div id="talking"></div>
 <button class="ptt" id="ptt" onmousedown="ptt_on()" onmouseup="ptt_off()">TALK</button>
+<h4>Members</h4>
+<ul id="roster">
+</ul>
 
 
 <div id=log></div>
