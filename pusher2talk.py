@@ -59,7 +59,6 @@ class start(object):
 		room = clientid.split(".")[0]
 		user = clientid.split(".")[1]
 		capability = TwilioCapability(account, token)
-		capability.allow_client_incoming(clientid)
 		capability.allow_client_outgoing(application_sid)
 		template_values = {"token": capability.generate()}
 		t = loader.get_template('twilioclient.html')
