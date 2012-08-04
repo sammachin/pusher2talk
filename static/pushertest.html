@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <head>
 <title>Pusher Test</title>
-<script src="http://js.pusher.com/1.11/pusher.min.js" type="text/javascript"></script>
+<script src="http://js.pusher.com/1.12/pusher.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript">
-   
+Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
+ 
 function doPusher(){
 	var pusher = new Pusher('c75e1662bedf930571b3');
-	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
 	var channel = pusher.subscribe("private-test");
 	channel.bind('client-talk', function(data) {
 			document.getElementById('status').innerHTML = "Talking:"+ data.user;
@@ -26,19 +26,15 @@ function doPusher(){
 }
 
 function ptt_on(){
-	var pusher = new Pusher('c75e1662bedf930571b3');
-	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
-	var channel = pusher.subscribe('private-test');
+	var pusher = new Pusher('c75e1662bedf930571b3');	
 	channel.bind('pusher:subscription_succeeded', function() {
-  		var triggered = channel.trigger('client-talk', { "Talking" : "TestUser" });
+  		var triggered = channel.trigger('client-talk', { "user" : "TestUser" });
 	});
 }
 function ptt_off(){
 	var pusher = new Pusher('c75e1662bedf930571b3');
-	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
-	var channel = pusher.subscribe('private-test');
 	channel.bind('pusher:subscription_succeeded', function() {
-  		var triggered = channel.trigger('client-stop', { "Talking" : "TestUser" });
+  		var triggered = channel.trigger('client-stop', { "user" : "TestUser" });
 	});
 }
 
