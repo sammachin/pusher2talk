@@ -77,7 +77,7 @@ class start(object):
 		print user + " entered " + room
 		c = twiml.Conference(room)
 		r = twiml.Response()
-		d = twiml.Dial(action="http://ec2.sammachin.com/pusher2talk/leaveroom?room={{room}}&user={{user}}")
+		d = twiml.Dial(action="http://ec2.sammachin.com/pusher2talk/leaveroom?room=%s&user=%s" % room, user)
 		d.append(c)
 		r.append(d)
 #		p = pusher.Pusher()
