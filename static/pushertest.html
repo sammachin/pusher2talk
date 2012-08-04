@@ -7,11 +7,12 @@
 
 Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
 
-Pusher.log = function(message) {
-  if (window.console && window.console.log) {
-    window.console.log(message);
-  }
-};
+//Pusher Debug to print to log
+//Pusher.log = function(message) {
+//  if (window.console && window.console.log) {
+//    window.console.log(message);
+// }
+//};
 
 
 var pusher = new Pusher('c75e1662bedf930571b3');
@@ -39,9 +40,7 @@ function ptt_on(){
 }
 
 function ptt_off(){
-	channel.bind('pusher:subscription_succeeded', function() {
-  		var triggered = channel.trigger('client-stop', { "user" : "TestUser" });
-	});
+  	channel.trigger('client-stop', { "user" : "TestUser" });
 }
 
 	
@@ -55,6 +54,8 @@ function ptt_off(){
 <button onclick="bind_event()">Subcribe</button>
 <button onclick="ptt_on()">Start Talk</button>
 <button onclick="ptt_off()">Stop Talk</button>
+<button onmousedown="ptt_on()" onmouseup="ptt_off()">TALK</button>
+
 
 
 </div>
