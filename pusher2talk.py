@@ -49,8 +49,9 @@ class start(object):
 		socket_id = urllib.unquote(cherrypy.request.params['socket_id'])
 		channel_name = urllib.unquote(cherrypy.request.params['channel_name'])
 		string_to_sign = socket_id + ":" + channel_name
+		sig = hmac.new(pusher.secret, msg=string_to_sign, digestmod=hashlib.sha256).hexdigest()
 		data = {}
-		data['auth'] = hmac.new(pusher.secret, msg=string_to_sign, digestmod=hashlib.sha256).hexdigest()
+		data['auth'] = pusher.key + ":" + sig
 		cherrypy.response.headers['content-type'] = "application/json"
 		return json.dumps(data)
 	def client(self, var=None, **params):
