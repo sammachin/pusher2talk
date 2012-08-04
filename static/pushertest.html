@@ -20,20 +20,20 @@ var channel = pusher.subscribe("private-{{room}}");
 
 function bind_event(){
 	channel.bind('client-talk', function(data) {
-			document.getElementById('status').innerHTML = "Talking:"+ data.user;
+			document.getElementById('room').innerHTML = data.user;
 			var sound = document.getElementById("sound1");
 			document.getElementById('ptt').style.visibility = 'hidden';
 			sound.Play();
 	   		}
 	);
 	channel.bind('client-stop', function(data) {
-			document.getElementById('status').innerHTML = "";
+			document.getElementById('room').innerHTML = "";
 			var sound = document.getElementById("sound1");
 			document.getElementById('ptt').style.visibility = 'visible';
 			sound.Play();
 			   		}
 	);		
-	document.getElementById('status').innerHTML = "Joined {{room}}";
+	document.getElementById('room').innerHTML = "Joined {{room}}";
 	
 }
 
@@ -43,23 +43,20 @@ function ptt_on(){
 
 function ptt_off(){
   	channel.trigger('client-stop', { "user" : "{{user}}" });
-	document.getElementById('status').innerHTML = "Joined {{room}}";
 }
 
 	
 </script>
 </head>
 
-<body>
+<body onload="bind_event()">
 
-<div id="status"></div>
-<embed src="static/chirp.mp3" autostart="false" width="0" height="0" id="sound1" enablejavascript="true">
-<button onclick="bind_event()">Join Room</button>
+<div id="room"></div><br>
+<div id="talking"></div>
 <button id="ptt" onmousedown="ptt_on()" onmouseup="ptt_off()">TALK</button>
 
 
 
-</div>
-
+<embed src="static/chirp.mp3" autostart="false" width="0" height="0" id="sound1" enablejavascript="true">
 </body> 
 </html>
