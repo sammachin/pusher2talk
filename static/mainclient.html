@@ -42,10 +42,12 @@ function bind_event(){
 
 function ptt_on(){		
 	channel.trigger('client-talk', { "user" : "{{user}}" });
+	conn.unmute()
 }
 
 function ptt_off(){
   	channel.trigger('client-stop', { "user" : "{{user}}" });
+	conn.mute()
 }
 
 	
@@ -80,12 +82,13 @@ function ptt_off(){
     });
 
     function call() {
-        Twilio.Device.connect({
+        var conn = Twilio.Device.connect({
 			  room: "{{room}}",
 			  user: "{{user}}"
 			});
-		
+		conn.mute()
     }
+
     function hangup() {
         Twilio.Device.disconnectAll();
     }
