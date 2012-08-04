@@ -101,6 +101,7 @@ class start(object):
 		p["private-"+room].trigger('leave', {'user' : user})
 		return "ok"
 	index.exposed = True
+	main.exposed = True
 	twilio.exposed = True
 	pusher.exposed = True			
 	clienttoken.exposed = True
