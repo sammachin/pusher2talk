@@ -11,6 +11,7 @@ import time
 import json
 import urllib2
 from twilio.util import TwilioCapability
+import creds
 
 
 settings.configure(TEMPLATE_DIRS = ( "/server/dontwakeme/static",))
