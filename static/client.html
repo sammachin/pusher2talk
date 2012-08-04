@@ -6,38 +6,51 @@
 	<script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.js"></script>
 	<script src="http://js.pusher.com/1.11/pusher.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-	<script type="text/javascript"> 	
-   		Twilio.Device.setup("{{ token }}");
- 
-   		Twilio.Device.ready(function (device) {
-        	$('#status').text('Ready to join conference');
-    	});
- 
-    	Twilio.Device.offline(function (device) {
-        	$('#status').text('Connection offline');
-    	});
- 
-    	Twilio.Device.error(function (error) {
-        	$('#status').text(error);
-    	});
- 
-    	Twilio.Device.connect(function (conn) {
-        	$('#status').text("Connected");
-    	});
- 
-    	Twilio.Device.disconnect(function (conn) {
-        	$('#status').text("Disconnected");
-    	});			
+    <script type="text/javascript">
 
-		function call() {
+        Twilio.Device.setup('{{token}}');
+
+        Twilio.Device.ready(function (device) {
+            $("#log").text("Ready");
+        });
+
+        Twilio.Device.error(function (error) {
+            $("#log").text("Error: " + error.message);
+        });
+
+        Twilio.Device.connect(function (conn) {
+            $("#log").text("Successfully established call");
+        });
+
+        Twilio.Device.disconnect(function (conn) {
+            $("#log").text("Call ended");
+        });
+
+        Twilio.Device.incoming(function (conn) {
+            $("#log").text("Incoming connection from " + conn.parameters.From);
+            // accept the incoming connection and start two-way audio
+            conn.accept();
+        });
+
+        function call() {
             Twilio.Device.connect();
         }
-       
- function hangup() {
+
+        function hangup() {
             Twilio.Device.disconnectAll();
         }
-		
-	</script>
+    </script>
+  </head>
+  <body>
+    <button class="call" onclick="call();">
+      Call
+    </button>
+
+    <button class="hangup" onclick="hangup();">
+      Hangup
+    </button>
+
+    <div id="log">Loading ...</div>
 	</head>
 	<body>
 		<button class="call" onclick="call();">
