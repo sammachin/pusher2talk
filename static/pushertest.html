@@ -20,14 +20,14 @@ var channel = pusher.subscribe("private-{{room}}");
 
 function bind_event(){
 	channel.bind('client-talk', function(data) {
-			document.getElementById('user').innerHTML = data.user;
+			document.getElementById('talkin').innerHTML = data.user;
 			var sound = document.getElementById("sound1");
 			document.getElementById('ptt').style.visibility = 'hidden';
 			sound.Play();
 	   		}
 	);
 	channel.bind('client-stop', function(data) {
-			document.getElementById('user').innerHTML = "";
+			document.getElementById('talking').innerHTML = "";
 			var sound = document.getElementById("sound1");
 			document.getElementById('ptt').style.visibility = 'visible';
 			sound.Play();
