@@ -62,7 +62,7 @@ class start(object):
 		capability.allow_client_incoming(clientid)
 		capability.allow_client_outgoing(application_sid)
 		template_values = {"token": capability.generate()}
-		t = loader.get_template('client.html')
+		t = loader.get_template('twilioclient.html')
 		c = Context(template_values)
 		return t.render(c)
 	def pusher(self, var=None, **params):
