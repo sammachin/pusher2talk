@@ -86,7 +86,7 @@ class start(object):
 		user = urllib.unquote(cherrypy.request.params['user'])
 		print user + " entered " + room
 		leaveurl= "http://ec2.sammachin.com/pusher2talk/leaveroom?room={0}&user={1}".format(room, user)
-		c = twiml.Conference(room)
+		c = twiml.Conference(room, startConferenceOnEnter="true", beep="false")
 		r = twiml.Response()
 		d = twiml.Dial(action=leaveurl)
 		d.append(c)
