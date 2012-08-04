@@ -29,10 +29,9 @@
 
     Twilio.Device.setup('{{token}}');
 
-	//Twilio.Device.sounds.outgoing(false);
 
     Twilio.Device.ready(function (device) {
-        $("#log").text("Ready");
+        console.log("Twilio Client Ready");
     });
 
     Twilio.Device.error(function (error) {
@@ -42,6 +41,7 @@
 
     Twilio.Device.connect(function (conn) {
 		console.log(conn.status);
+		conn.mute()
         $("#room").text("Connected: {{room}}");
     });
 
@@ -56,13 +56,11 @@
         conn.accept();
     });
 
-	var conn = Twilio.Device.connect({
+	Twilio.Device.connect({
 		  room: "{{room}}",
 		  user: "{{user}}"
 		});
-	
-	conn.mute();
-
+		
 // Just these functions to control the sessions
 
 function ptt_on(){		
