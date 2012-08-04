@@ -15,7 +15,7 @@ import creds
 import pusher
 
 
-settings.configure(TEMPLATE_DIRS = ( "/server/dontwakeme/static",))
+settings.configure(TEMPLATE_DIRS = ( "/server/pusher2talk/static",))
 
 #Twilio Details
 account = creds.twilio_account
