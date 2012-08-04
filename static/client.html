@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
  	
-    		Twilio.Device.setup("% token %");
+    		Twilio.Device.setup("{% token %}");
  
     		Twilio.Device.ready(function (device) {
         		$('#status').text('Ready to join conference');
@@ -30,17 +30,10 @@
  
     		Twilio.Device.disconnect(function (conn) {
         		$('#status').text("Disconnected");
-    		});
-			var pusher = new Pusher('400179bcf9b3d8e9327a');
-			var channel = pusher.subscribe("% room %");
-			channel.bind('talk', function(data) {
-					document.getElementById('status').innerHTML = "Answered:"+ data.CallerID;
-			   		}
+    		});			
 		});
 		
 	</script>
 	</head>
 	<body>
-		<div id="status">Connection offline</div>
-		<button onmousedown="ptt_on()" onmouseup="ptt_off()">TALK</button>
 	</body>

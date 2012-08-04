@@ -74,15 +74,15 @@ class start(object):
 		d = twiml.Dial(action="http://ec2.sammachin.com/pusher2talk/leaveroom")
 		d.append(c)
 		r.append(d)
-		p = pusher.Pusher()
-		p[room].trigger('join', {'user' : user})
+#		p = pusher.Pusher()
+#		p[room].trigger('join', {'user' : user})
 		return str(r)
 	def leaveroom(self, var=None, **params):
 		clientid = urllib.unquote(cherrypy.request.params['From'])
 		room = clientid.split(".")[0]
 		user = clientid.split(".")[1]
-		p = pusher.Pusher()
-		p[room].trigger('leave', {'user' : user})
+#		p = pusher.Pusher()
+#		p[room].trigger('leave', {'user' : user})
 		return "ok"
 	index.exposed = True
 	client.exposed = True			
