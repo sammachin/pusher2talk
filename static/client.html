@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
  	
-    		Twilio.Device.setup("{% token %}");
+    		Twilio.Device.setup("{{ token }}");
  
     		Twilio.Device.ready(function (device) {
         		$('#status').text('Ready to join conference');
