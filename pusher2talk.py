@@ -82,6 +82,7 @@ class start(object):
 	index.exposed = True
 	client.exposed = True			
 	clienttoken.exposed = True
+	pusherauth.exposed = True
 	joinroom.exposed = True
 	leaveroom.exposed = True
 
