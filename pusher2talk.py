@@ -74,7 +74,7 @@ class start(object):
 	def joinroom(self, var=None, **params):
 		room = urllib.unquote(cherrypy.request.params['room'])
 		user = urllib.unquote(cherrypy.request.params['user'])
-		print clientid
+		print user + " entered " + room
 		c = twiml.Conference(room)
 		r = twiml.Response()
 		d = twiml.Dial(action="http://ec2.sammachin.com/pusher2talk/leaveroom?room={{room}}&user={{user}}")
