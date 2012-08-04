@@ -5,10 +5,10 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript">
 Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
- 
+var pusher = new Pusher('c75e1662bedf930571b3');
+var channel = pusher.subscribe("private-test");
+
 function doPusher(){
-	var pusher = new Pusher('c75e1662bedf930571b3');
-	var channel = pusher.subscribe("private-test");
 	channel.bind('client-talk', function(data) {
 			document.getElementById('status').innerHTML = "Talking:"+ data.user;
 			var sound = document.getElementById("sound1");
@@ -25,14 +25,12 @@ function doPusher(){
 	
 }
 
-function ptt_on(){
-	var pusher = new Pusher('c75e1662bedf930571b3');	
+function ptt_on(){		
 	channel.bind('pusher:subscription_succeeded', function() {
   		var triggered = channel.trigger('client-talk', { "user" : "TestUser" });
 	});
 }
 function ptt_off(){
-	var pusher = new Pusher('c75e1662bedf930571b3');
 	channel.bind('pusher:subscription_succeeded', function() {
   		var triggered = channel.trigger('client-stop', { "user" : "TestUser" });
 	});
