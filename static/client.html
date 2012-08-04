@@ -6,37 +6,34 @@
 	<script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.js"></script>
 	<script src="http://js.pusher.com/1.11/pusher.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
- 	
-    		Twilio.Device.setup("{{ token }}");
+	<script type="text/javascript"> 	
+   		Twilio.Device.setup("{{ token }}");
  
-    		Twilio.Device.ready(function (device) {
-        		$('#status').text('Ready to join conference');
-    		});
+   		Twilio.Device.ready(function (device) {
+        	$('#status').text('Ready to join conference');
+    	});
  
-    		Twilio.Device.offline(function (device) {
-        		$('#status').text('Connection offline');
-    		});
+    	Twilio.Device.offline(function (device) {
+        	$('#status').text('Connection offline');
+    	});
  
-    		Twilio.Device.error(function (error) {
-        		$('#status').text(error);
-    		});
+    	Twilio.Device.error(function (error) {
+        	$('#status').text(error);
+    	});
  
-    		Twilio.Device.connect(function (conn) {
-        		$('#status').text("Connected");
-    		});
+    	Twilio.Device.connect(function (conn) {
+        	$('#status').text("Connected");
+    	});
  
-    		Twilio.Device.disconnect(function (conn) {
-        		$('#status').text("Disconnected");
-    		});			
-		});
-		
+    	Twilio.Device.disconnect(function (conn) {
+        	$('#status').text("Disconnected");
+    	});			
+
 		function call() {
             Twilio.Device.connect();
         }
-
-        function hangup() {
+       
+ function hangup() {
             Twilio.Device.disconnectAll();
         }
 		
