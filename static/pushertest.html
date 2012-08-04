@@ -16,7 +16,7 @@ Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
 
 
 var pusher = new Pusher('c75e1662bedf930571b3');
-var channel = pusher.subscribe("private-test");
+var channel = pusher.subscribe("private-{{room}}");
 
 function bind_event(){
 	channel.bind('client-talk', function(data) {
@@ -36,11 +36,11 @@ function bind_event(){
 }
 
 function ptt_on(){		
-	channel.trigger('client-talk', { "user" : "TestUser" });
+	channel.trigger('client-talk', { "user" : "{{user}}" });
 }
 
 function ptt_off(){
-  	channel.trigger('client-stop', { "user" : "TestUser" });
+  	channel.trigger('client-stop', { "user" : "{{user}}" });
 }
 
 	

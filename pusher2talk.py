@@ -54,8 +54,8 @@ class start(object):
 		data['auth'] = pusher.key + ":" + sig
 		cherrypy.response.headers['content-type'] = "application/json"
 		return json.dumps(data)
-	def client(self, var=None, **params):
-		clientid = urllib.unquote(cherrypy.request.params['clientid'])
+	def twilio(self, var=None, **params):
+		clientid = urllib.unquote(cherrypy.request.params['id'])
 		room = clientid.split(".")[0]
 		user = clientid.split(".")[1]
 		capability = TwilioCapability(account, token)
@@ -63,6 +63,14 @@ class start(object):
 		capability.allow_client_outgoing(application_sid)
 		template_values = {"token": capability.generate()}
 		t = loader.get_template('client.html')
+		c = Context(template_values)
+		return t.render(c)
+	def pusher(self, var=None, **params):
+		clientid = urllib.unquote(cherrypy.request.params['id'])
+		room = clientid.split(".")[0]
+		user = clientid.split(".")[1]
+		template_values = {"room": room, "user" : user}
+		t = loader.get_template('pushertest.html')
 		c = Context(template_values)
 		return t.render(c)
 	def joinroom(self, var=None, **params):
@@ -86,7 +94,8 @@ class start(object):
 #		p[room].trigger('leave', {'user' : user})
 		return "ok"
 	index.exposed = True
-	client.exposed = True			
+	twilio.exposed = True
+	pusher.exposed = True			
 	clienttoken.exposed = True
 	pusherauth.exposed = True
 	joinroom.exposed = True
