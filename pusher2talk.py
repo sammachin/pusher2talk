@@ -13,6 +13,9 @@ import urllib2
 from twilio.util import TwilioCapability
 import creds
 import pusher
+import hmac
+import hashlib
+
 
 
 settings.configure(TEMPLATE_DIRS = ( "/server/pusher2talk/static",))
