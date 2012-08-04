@@ -71,6 +71,16 @@ class start(object):
 		t = loader.get_template('pushertest.html')
 		c = Context(template_values)
 		return t.render(c)
+	def main(self, var=None, **params):
+		clientid = urllib.unquote(cherrypy.request.params['id'])
+		room = clientid.split(".")[0]
+		user = clientid.split(".")[1]
+		capability = TwilioCapability(account, token)
+		capability.allow_client_outgoing(application_sid)
+		template_values = {"token": capability.generate(), "room" : room, "user": user}
+		t = loader.get_template('mainclient.html')
+		c = Context(template_values)
+		return t.render(c)
 	def joinroom(self, var=None, **params):
 		room = urllib.unquote(cherrypy.request.params['room'])
 		user = urllib.unquote(cherrypy.request.params['user'])
@@ -81,14 +91,14 @@ class start(object):
 		d = twiml.Dial(action=leaveurl)
 		d.append(c)
 		r.append(d)
-#		p = pusher.Pusher()
-#		p[room].trigger('join', {'user' : user})
+		p = pusher.Pusher()
+		p["private-"+room].trigger('join', {'user' : user})
 		return str(r)
 	def leaveroom(self, var=None, **params):
 		room = urllib.unquote(cherrypy.request.params['room'])
 		user = urllib.unquote(cherrypy.request.params['user'])
-#		p = pusher.Pusher()
-#		p[room].trigger('leave', {'user' : user})
+		p = pusher.Pusher()
+		p["private-"+room].trigger('leave', {'user' : user})
 		return "ok"
 	index.exposed = True
 	twilio.exposed = True
