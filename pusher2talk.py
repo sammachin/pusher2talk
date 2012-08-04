@@ -42,7 +42,6 @@ class start(object):
 		room = clientid.split(".")[0]
 		user = clientid.split(".")[1]
 		capability = TwilioCapability(account, token)
-		capability.allow_client_incoming(clientid)
 		capability.allow_client_outgoing(application_sid)
 		return capability.generate()
 	def pusherauth(self, var=None, **params):
@@ -60,7 +59,7 @@ class start(object):
 		user = clientid.split(".")[1]
 		capability = TwilioCapability(account, token)
 		capability.allow_client_outgoing(application_sid)
-		template_values = {"token": capability.generate()}
+		template_values = {"token": capability.generate(), "room" : room, "user": user}
 		t = loader.get_template('twilioclient.html')
 		c = Context(template_values)
 		return t.render(c)
@@ -73,22 +72,20 @@ class start(object):
 		c = Context(template_values)
 		return t.render(c)
 	def joinroom(self, var=None, **params):
-		clientid = urllib.unquote(cherrypy.request.params['From'])
+		room = urllib.unquote(cherrypy.request.params['room'])
+		user = urllib.unquote(cherrypy.request.params['user'])
 		print clientid
-		#room = clientid.split(".")[0]
-		#user = clientid.split(".")[1]
-		c = twiml.Conference("room")
+		c = twiml.Conference(room)
 		r = twiml.Response()
-		d = twiml.Dial(action="http://ec2.sammachin.com/pusher2talk/leaveroom")
+		d = twiml.Dial(action="http://ec2.sammachin.com/pusher2talk/leaveroom?room={{room}}&user={{user}}")
 		d.append(c)
 		r.append(d)
 #		p = pusher.Pusher()
 #		p[room].trigger('join', {'user' : user})
 		return str(r)
 	def leaveroom(self, var=None, **params):
-		clientid = urllib.unquote(cherrypy.request.params['From'])
-		room = clientid.split(".")[0]
-		user = clientid.split(".")[1]
+		room = urllib.unquote(cherrypy.request.params['room'])
+		user = urllib.unquote(cherrypy.request.params['user'])
 #		p = pusher.Pusher()
 #		p[room].trigger('leave', {'user' : user})
 		return "ok"
