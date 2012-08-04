@@ -56,7 +56,7 @@
         conn.accept();
     });
 
-	Twilio.Device.connect({
+	var conn = Twilio.Device.connect({
 		  room: "{{room}}",
 		  user: "{{user}}"
 		});
