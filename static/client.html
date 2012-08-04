@@ -15,14 +15,17 @@
         });
 
         Twilio.Device.error(function (error) {
+			console.log(error);
             $("#log").text("Error: " + error.message);
         });
 
         Twilio.Device.connect(function (conn) {
+			console.log(conn.status);
             $("#log").text("Successfully established call");
         });
 
         Twilio.Device.disconnect(function (conn) {
+			console.log(conn.status);
             $("#log").text("Call ended");
         });
 
@@ -34,6 +37,7 @@
 
         function call() {
             Twilio.Device.connect();
+			
         }
 
         function hangup() {
