@@ -6,21 +6,13 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
 <script type="text/javascript">
+// All the setup & connection done on load
+	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
 
-Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
-
-//Pusher Debug to print to log
-//Pusher.log = function(message) {
-//  if (window.console && window.console.log) {
-//    window.console.log(message);
-// }
-//};
+	var pusher = new Pusher('c75e1662bedf930571b3');
+	var channel = pusher.subscribe("private-{{room}}");
 
 
-var pusher = new Pusher('c75e1662bedf930571b3');
-var channel = pusher.subscribe("private-{{room}}");
-
-function bind_event(){
 	channel.bind('client-talk', function(data) {
 			document.getElementById('talking').innerHTML = "Speaking:" + data.user;
 			document.getElementById('ptt').style.visibility = 'hidden';
@@ -33,22 +25,7 @@ function bind_event(){
 			sound.Play();
 			 }
 	);
-	document.getElementById('room').innerHTML = "Channel: {{room}}";
 	
-}
-function ptt_on(){		
-	channel.trigger('client-talk', { "user" : "{{user}}" });
-	conn.unmute()
-	var sound = document.getElementById("sound1");
-	sound.Play();
-}
-
-function ptt_off(){
-  	channel.trigger('client-stop', { "user" : "{{user}}" });
-	conn.mute()
-	var sound = document.getElementById("sound2");
-	sound.Play();
-}
 
     Twilio.Device.setup('{{token}}');
 
@@ -65,7 +42,7 @@ function ptt_off(){
 
     Twilio.Device.connect(function (conn) {
 		console.log(conn.status);
-        $("#log").text("Successfully established call");
+        $("#room").text("Connected: {{room}}");
     });
 
     Twilio.Device.disconnect(function (conn) {
@@ -79,12 +56,29 @@ function ptt_off(){
         conn.accept();
     });
 
-var conn = Twilio.Device.connect({
+	var conn = Twilio.Device.connect({
 		  room: "{{room}}",
 		  user: "{{user}}"
 		});
+	
+	conn.mute();
 
-conn.mute()
+// Just these functions to control the sessions
+
+function ptt_on(){		
+	channel.trigger('client-talk', { "user" : "{{user}}" });
+	conn.unmute()
+	var sound = document.getElementById("sound1");
+	sound.Play();
+}
+
+function ptt_off(){
+  	channel.trigger('client-stop', { "user" : "{{user}}" });
+	conn.mute()
+	var sound = document.getElementById("sound2");
+	sound.Play();
+}
+
 
 </script>
 
