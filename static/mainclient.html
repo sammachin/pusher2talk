@@ -29,6 +29,8 @@ function bind_event(){
 	channel.bind('client-stop', function(data) {
 			document.getElementById('talking').innerHTML = "";
 			document.getElementById('ptt').style.visibility = 'visible';
+			var sound = document.getElementById("sound2");
+			sound.Play();
 			 }
 	);
 	document.getElementById('room').innerHTML = "Channel: {{room}}";
@@ -44,10 +46,9 @@ function ptt_on(){
 function ptt_off(){
   	channel.trigger('client-stop', { "user" : "{{user}}" });
 	conn.mute()
-	var sound = document.getElementById("sound1");
+	var sound = document.getElementById("sound2");
 	sound.Play();
 }
-
 
     Twilio.Device.setup('{{token}}');
 
@@ -96,5 +97,7 @@ conn.mute()
 
 <div id=log></div>
 <embed src="static/chirp.mp3" autostart="false" width="0" height="0" id="sound1" enablejavascript="true">
+<embed src="static/over.mp3" autostart="false" width="0" height="0" id="sound2" enablejavascript="true">
+	
 </body> 
 </html>
