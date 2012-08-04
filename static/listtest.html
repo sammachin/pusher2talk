@@ -3,11 +3,11 @@
 <title>List Test</title>
 
 <script language="javascript">
-function addElement(){
+function addElement(member){
 	var container = document.getElementById('roster');
 	var new_element = document.createElement('li');
-	new_element.setAttribute("id", "123");
-	new_element.innerHTML = "Member";
+	new_element.setAttribute("id", member);
+	new_element.innerHTML = member;
 	container.insertBefore(new_element, container.firstChild);
 }
 
