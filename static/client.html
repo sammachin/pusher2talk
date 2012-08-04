@@ -13,7 +13,6 @@
  
     		Twilio.Device.ready(function (device) {
         		$('#status').text('Ready to join conference');
-        		Twilio.Device.connect();
     		});
  
     		Twilio.Device.offline(function (device) {
@@ -33,7 +32,25 @@
     		});			
 		});
 		
+		function call() {
+            Twilio.Device.connect();
+        }
+
+        function hangup() {
+            Twilio.Device.disconnectAll();
+        }
+		
 	</script>
 	</head>
 	<body>
+		<button class="call" onclick="call();">
+	      Call
+	    </button>
+
+	    <button class="hangup" onclick="hangup();">
+	      Hangup
+	    </button>
+
+	    <div id="status">Loading...</div>
+		
 	</body>
