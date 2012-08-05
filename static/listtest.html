@@ -8,7 +8,7 @@
 function getusers(){
 	$.getJSON('./getusers?room={{room}}', function(data) {
     	$.each(data.users, function(index, val) {
-    		alert(val);
+    		addElement(val);
   		});
 	});
 }
