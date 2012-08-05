@@ -21,7 +21,7 @@ var channel = pusher.subscribe("private-{{room}}");
 
 function bind_event(){
 	channel.bind('client-talk', function(data) {
-			document.getElementById('talking').innerHTML = "Speaking:" + data.user;
+			document.getElementById('talking').innerHTML = "Speaking:  " + data.user;
 			var sound = document.getElementById("sound1");
 			document.getElementById('ptt').style.visibility = 'hidden';
 			sound.Play();

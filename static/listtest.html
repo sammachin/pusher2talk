@@ -3,6 +3,19 @@
 <title>List Test</title>
 
 <script language="javascript">
+
+$.getJSON('/getusers', function(data) {
+  $.each(data, function(key, val) {
+    items.push('<li id="' + key + '">' + val + '</li>');
+  });
+
+  $('<ul/>', {
+    'class': 'my-new-list',
+    html: items.join('')
+  }).appendTo('body');
+});
+
+
 function addElement(member){
 	var container = document.getElementById('roster');
 	var new_element = document.createElement('li');
@@ -19,8 +32,6 @@ function removeElement(id){
 <body>
 <h4>Members</h4>
 <ul id="roster">
-<li id="sammachin">sammachin</li>
-<li id="kevinprince">kevinprince</li>
 </ul>
 <button onclick="addElement()">Add</button>
 <button onclick="removeElement('123')">Remove</button>

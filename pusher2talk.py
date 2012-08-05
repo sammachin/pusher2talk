@@ -15,8 +15,9 @@ import creds
 import pusher
 import hmac
 import hashlib
+import memcache
 
-
+mc = memcache.Client(['127.0.0.1:11211'], debug=0)
 
 settings.configure(TEMPLATE_DIRS = ( "/server/pusher2talk/static",))
 
@@ -30,7 +31,21 @@ pusher.app_id = creds.pusher_app_id
 pusher.key = creds.pusher_key
 pusher.secret = creds.pusher_secret
 
-					
+
+def adduser(room, user):
+	data = json.loads(mc.get(room))
+	data['users'].append(user)
+	mc.set(room, json.dumps(data))
+
+def deluser(room, user):
+	data = json.loads(mc.get(room))
+	data['users'].remove(user)
+	mc.set(room, json.dumps(data))
+
+def getusers(room):
+	data = json.loads(mc.get(room))
+	return data
+
 class start(object):
 	def index(self):
 		template_values = {}
@@ -93,22 +108,36 @@ class start(object):
 		r.append(d)
 		p = pusher.Pusher()
 		p["private-"+room].trigger('join', {'user' : user})
+		adduser(room, user)
 		return str(r)
 	def leaveroom(self, var=None, **params):
 		room = urllib.unquote(cherrypy.request.params['room'])
 		user = urllib.unquote(cherrypy.request.params['user'])
 		p = pusher.Pusher()
 		p["private-"+room].trigger('leave', {'user' : user})
+		deluser(room, user)
 		return "ok"
+	def getusers(self, var=None, **params):
+		room = urllib.unquote(cherrypy.request.params['room'])
+		data = getusers(room)
+		cherrypy.response.headers['content-type'] = "application/json"
+		return data
+	def test(self, var=None, **params):
+		room = urllib.unquote(cherrypy.request.params['room'])
+		user = urllib.unquote(cherrypy.request.params['user'])
+		template_values = {"room": room, "user" : user}
+		t = loader.get_template('listtest.html')
+		c = Context(template_values)
+		return t.render(c)
+		
 	index.exposed = True
 	main.exposed = True
-	twilio.exposed = True
-	pusher.exposed = True			
+	test.exposed = True			
 	clienttoken.exposed = True
 	pusherauth.exposed = True
 	joinroom.exposed = True
 	leaveroom.exposed = True
-
+	getusers.exposed - True
 
 
 cherrypy.config.update('app.cfg')
