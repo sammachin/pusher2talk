@@ -4,15 +4,10 @@
 
 <script language="javascript">
 
-$.getJSON('/getusers', function(data) {
-  $.each(data, function(key, val) {
-    items.push('<li id="' + key + '">' + val + '</li>');
+$.getJSON('./getusers', function(data) {
+  $.each(data.users, function(val) {
+    alert(val);
   });
-
-  $('<ul/>', {
-    'class': 'my-new-list',
-    html: items.join('')
-  }).appendTo('body');
 });
 
 
