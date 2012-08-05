@@ -6,7 +6,7 @@
 <script language="javascript">
 
 function getusers(){
-	$.getJSON('./getusers', function(data) {
+	$.getJSON('./getusers?room={{room}}', function(data) {
   		$.each(data.users, function(val) {
     		alert(val);
   		});
