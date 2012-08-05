@@ -97,8 +97,8 @@ class start(object):
 		c = Context(template_values)
 		return t.render(c)
 	def joinroom(self, var=None, **params):
-		room = urllib.unquote(cherrypy.request.params['room'])
-		user = urllib.unquote(cherrypy.request.params['user'])
+		room = str(urllib.unquote(cherrypy.request.params['room']))
+		user = str(urllib.unquote(cherrypy.request.params['user']))
 		print user + " entered " + room
 		leaveurl= "http://ec2.sammachin.com/pusher2talk/leaveroom?room={0}&user={1}".format(room, user)
 		c = twiml.Conference(room, waitUrl="", beep="false")
@@ -111,25 +111,24 @@ class start(object):
 		adduser(room, user)
 		return str(r)
 	def leaveroom(self, var=None, **params):
-		room = urllib.unquote(cherrypy.request.params['room'])
-		user = urllib.unquote(cherrypy.request.params['user'])
+		room = str(urllib.unquote(cherrypy.request.params['room']))
+		user = str(urllib.unquote(cherrypy.request.params['user']))
 		p = pusher.Pusher()
 		p["private-"+room].trigger('leave', {'user' : user})
 		deluser(room, user)
 		return "ok"
 	def getusers(self, var=None, **params):
-		room = urllib.unquote(cherrypy.request.params['room'])
+		room = str(urllib.unquote(cherrypy.request.params['room']))
 		data = getusers(room)
 		cherrypy.response.headers['content-type'] = "application/json"
 		return data
 	def test(self, var=None, **params):
-		room = urllib.unquote(cherrypy.request.params['room'])
-		user = urllib.unquote(cherrypy.request.params['user'])
+		room = str(urllib.unquote(cherrypy.request.params['room']))
+		user = str(urllib.unquote(cherrypy.request.params['user']))
 		template_values = {"room": room, "user" : user}
 		t = loader.get_template('listtest.html')
 		c = Context(template_values)
 		return t.render(c)
-		
 	index.exposed = True
 	main.exposed = True
 	test.exposed = True			
