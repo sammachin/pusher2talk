@@ -38,6 +38,17 @@
 			 }
 	);
 	
+// get the current roster
+	$.getJSON('./getusers?room={{room}}', function(data) {
+    	$.each(data.users, function(index, val) {
+    		var container = document.getElementById('roster');
+			var new_element = document.createElement('li');
+			new_element.setAttribute("id", val);
+			new_element.innerHTML = val;
+			container.insertBefore(new_element, container.firstChild);
+  		});
+	});
+
 	
 	
 
