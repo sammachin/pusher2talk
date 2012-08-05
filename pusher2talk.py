@@ -122,7 +122,7 @@ class start(object):
 		room = str(urllib.unquote(cherrypy.request.params['room']))
 		data = getusers(room)
 		cherrypy.response.headers['content-type'] = "application/json"
-		return data
+		return json.dumps(data)
 	def test(self, var=None, **params):
 		room = str(urllib.unquote(cherrypy.request.params['room']))
 		user = str(urllib.unquote(cherrypy.request.params['user']))
