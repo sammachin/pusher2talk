@@ -137,7 +137,7 @@ class start(object):
 	pusherauth.exposed = True
 	joinroom.exposed = True
 	leaveroom.exposed = True
-	getusers.exposed - True
+	getusers.exposed = True
 
 
 cherrypy.config.update('app.cfg')
