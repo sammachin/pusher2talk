@@ -7,7 +7,7 @@
 <script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
 <script type="text/javascript">
 // All the setup & connection done on load
-	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth';
+	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth?user={{user}}';
 
 	var pusher = new Pusher('c75e1662bedf930571b3');
 	var channel = pusher.subscribe("private-{{room}}");

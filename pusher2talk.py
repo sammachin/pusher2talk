@@ -63,12 +63,14 @@ class start(object):
 	def pusherauth(self, var=None, **params):
 		socket_id = urllib.unquote(cherrypy.request.params['socket_id'])
 		channel_name = urllib.unquote(cherrypy.request.params['channel_name'])
-		string_to_sign = socket_id + ":" + channel_name
-		sig = hmac.new(pusher.secret, msg=string_to_sign, digestmod=hashlib.sha256).hexdigest()
-		data = {}
-		data['auth'] = pusher.key + ":" + sig
+		user = str(urllib.unquote(cherrypy.request.params['user']))
+		channel_data = {}
+		channel_data['user'] = user
+		p = pusher.Pusher(app_id=creds.pusher_app_id, key=creds.pusher_key, secret=creds.psuher_secret)
+		auth = p[channel_name].authenticate(socket_id, json.dumps(channel_data))
+		json_data = json.dumps(auth)
 		cherrypy.response.headers['content-type'] = "application/json"
-		return json.dumps(data)
+		return json.dumps(auth)
 	def twilio(self, var=None, **params):
 		clientid = urllib.unquote(cherrypy.request.params['id'])
 		room = clientid.split(".")[0]
