@@ -64,10 +64,10 @@ class start(object):
 		socket_id = urllib.unquote(cherrypy.request.params['socket_id'])
 		channel_name = urllib.unquote(cherrypy.request.params['channel_name'])
 		user = str(urllib.unquote(cherrypy.request.params['user']))
-		channel_data = {}
-		channel_data['user_id'] = user
+		channel_data = {'user_id': socket_id}
+		channel_data['user_info'] = {'user':user}
 		p = pusher.Pusher(app_id=creds.pusher_app_id, key=creds.pusher_key, secret=creds.pusher_secret)
-		auth = p[channel_name].authenticate(socket_id, json.dumps(channel_data))
+		auth = p[channel_name].authenticate(socket_id, channel_data)
 		json_data = json.dumps(auth)
 		cherrypy.response.headers['content-type'] = "application/json"
 		return json.dumps(auth)
