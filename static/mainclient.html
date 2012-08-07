@@ -48,7 +48,7 @@
 	);
 	
 	channel.bind('pusher:member_removed', function(data) {
-			return (elem=document.getElementById("sub".data.info.user)).parentNode.removeChild(elem);
+			return (elem=document.getElementById("sub" + data.info.user)).parentNode.removeChild(elem);
 			 }
 	);
 	
