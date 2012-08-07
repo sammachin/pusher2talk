@@ -51,28 +51,28 @@
 			return (elem=document.getElementById("sub" + data.info.user)).parentNode.removeChild(elem);
 			 }
 	);
-	
-// get the active current roster
-	$.getJSON('./getusers?room={{room}}', function(data) {
-    	$.each(data.users, function(index, val) {
-    		var container = document.getElementById('active-roster');
-			var new_element = document.createElement('li');
-			new_element.setAttribute("id", "active" + val);
-			new_element.innerHTML = val;
-			container.insertBefore(new_element, container.firstChild);
-  		});
-	});
-	
-// get the subscribed current roster
-	channel.members.each(function(member) {
+		
+	channel.bind('pusher:subscription_succeeded', function(members) {
+		members.each(function(member) {
 	    	var container = document.getElementById('sub-roster');
 			var new_element = document.createElement('li');
 			new_element.setAttribute("id", "sub" + member.info.user);
-			new_element.innerHTML = member.user;
+			new_element.innerHTML = member.info.user;
 			container.insertBefore(new_element, container.firstChild);
+		});
 	});
 
-	
+// get the active current roster
+		$.getJSON('./getusers?room={{room}}', function(data) {
+	    	$.each(data.users, function(index, val) {
+	    		var container = document.getElementById('active-roster');
+				var new_element = document.createElement('li');
+				new_element.setAttribute("id", "active" + val);
+				new_element.innerHTML = val;
+				container.insertBefore(new_element, container.firstChild);
+	  		});
+		});	
+
 
     Twilio.Device.setup('{{token}}');
 
@@ -124,12 +124,8 @@ function ptt_off(){
 	sound.Play();
 }
 
-
-
 </script>
-
 </head>
-
 <body>
 
 <div id="room"></div><br>
