@@ -7,13 +7,19 @@
 <script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
 <script type="text/javascript">
 // All the setup & connection done on load
-	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth?user={{user}}';
 
+	var status = "idle";
+	var conn;
+	var timeout;
+	
+	
+	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth?user={{user}}';
 	var pusher = new Pusher('c75e1662bedf930571b3');
 	var channel = pusher.subscribe("presence-{{room}}");
 
 
 	channel.bind('client-talk', function(data) {
+			
 			document.getElementById('talking').innerHTML = "Speaking:" + data.user;
 			document.getElementById('ptt').style.visibility = 'hidden';
 	   		}
@@ -23,6 +29,7 @@
 			document.getElementById('ptt').style.visibility = 'visible';
 			var sound = document.getElementById("sound2");
 			sound.Play();
+			timeout=setTimeout(disconnect(),30000);	
 			 }
 	);
 	channel.bind('join', function(data) {
@@ -53,6 +60,7 @@
 	);
 		
 	channel.bind('pusher:subscription_succeeded', function(members) {
+		status = "idle";
 		members.each(function(member) {
 	    	var container = document.getElementById('sub-roster');
 			var new_element = document.createElement('li');
@@ -62,7 +70,7 @@
 		});
 	});
 
-// get the active current roster
+// get the active current roster of users on the conf call
 		$.getJSON('./getusers?room={{room}}', function(data) {
 	    	$.each(data.users, function(index, val) {
 	    		var container = document.getElementById('active-roster');
@@ -73,9 +81,8 @@
 	  		});
 		});	
 
-
+// Setup Twilio client
     Twilio.Device.setup('{{token}}');
-
 
     Twilio.Device.ready(function (device) {
         console.log("Twilio Client Ready");
@@ -89,22 +96,34 @@
     Twilio.Device.connect(function (conn) {
 		console.log(conn.status);
 		conn.mute()
+		status = "active";
         $("#room").text("Connected: {{room}}");
     });
 
-    Twilio.Device.disconnect(function (conn) {
+	Twilio.Device.disconnect(function (conn) {
 		console.log(conn.status);
-        $("#log").text("Call ended");
+		conn.mute()
+		status = "idle";
+        $("#room").text("Idle: {{room}}");
     });
 
-	var conn = Twilio.Device.connect({
+function connect(){
+	conn = Twilio.Device.connect({
 		  room: "{{room}}",
 		  user: "{{user}}"
 		});
-		
-// Just these functions to control the sessions
+}
 
-function ptt_on(){		
+function disconnect(){
+	conn = Twilio.Device.disconnect();
+}
+
+// Just these functions to control the session
+function ptt_on(){
+	if (status = "idle")
+	  {
+	  connect();
+	  }
 	channel.trigger('client-talk', { "user" : "{{user}}" });
 	conn.unmute()
 	var sound = document.getElementById("sound1");
@@ -116,6 +135,7 @@ function ptt_off(){
 	conn.mute()
 	var sound = document.getElementById("sound2");
 	sound.Play();
+	timeout=setTimeout(disconnect(),30000);	
 }
 
 </script>
