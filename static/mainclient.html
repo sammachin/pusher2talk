@@ -115,6 +115,7 @@ function connect(){
 }
 
 function disconnect(){
+	alert("dropping twilio");
 	conn = Twilio.Device.disconnect();
 }
 
