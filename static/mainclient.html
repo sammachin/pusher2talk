@@ -116,7 +116,7 @@ function connect(){
 
 function disconnect(){
 	alert("dropping twilio");
-	conn = Twilio.Device.disconnect();
+	conn.disconnect();
 }
 
 // Just these functions to control the session
