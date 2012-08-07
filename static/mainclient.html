@@ -34,7 +34,7 @@
 			 }
 	);
 	channel.bind('leave', function(data) {
-			return (elem=document.getElementById("active".data.user)).parentNode.removeChild(elem);
+			return (elem=document.getElementById("active" + data.user)).parentNode.removeChild(elem);
 			 }
 	);
 	
