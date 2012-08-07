@@ -110,14 +110,14 @@ class start(object):
 		d.append(c)
 		r.append(d)
 		p = pusher.Pusher()
-		p["private-"+room].trigger('join', {'user' : user})
+		p["presence-"+room].trigger('join', {'user' : user})
 		adduser(room, user)
 		return str(r)
 	def leaveroom(self, var=None, **params):
 		room = str(urllib.unquote(cherrypy.request.params['room']))
 		user = str(urllib.unquote(cherrypy.request.params['user']))
 		p = pusher.Pusher()
-		p["private-"+room].trigger('leave', {'user' : user})
+		p["presence-"+room].trigger('leave', {'user' : user})
 		deluser(room, user)
 		return "ok"
 	def getusers(self, var=None, **params):

@@ -10,7 +10,7 @@
 	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth?user={{user}}';
 
 	var pusher = new Pusher('c75e1662bedf930571b3');
-	var channel = pusher.subscribe("private-{{room}}");
+	var channel = pusher.subscribe("presence-{{room}}");
 
 
 	channel.bind('client-talk', function(data) {
@@ -26,30 +26,52 @@
 			 }
 	);
 	channel.bind('join', function(data) {
-			var container = document.getElementById('roster');
+			var container = document.getElementById('active-roster');
 			var new_element = document.createElement('li');
-			new_element.setAttribute("id", data.user);
+			new_element.setAttribute("id", "active".data.user);
 			new_element.innerHTML = data.user;
 			container.insertBefore(new_element, container.firstChild);
 			 }
 	);
 	channel.bind('leave', function(data) {
-			return (elem=document.getElementById(data.user)).parentNode.removeChild(elem);
+			return (elem=document.getElementById("active".data.user)).parentNode.removeChild(elem);
 			 }
 	);
 	
-// get the current roster
+	channel.bind('pusher:member_added', function(data) {
+			var container = document.getElementById('sub-roster');
+			var new_element = document.createElement('li');
+			new_element.setAttribute("id", "sub".data.info.user);
+			new_element.innerHTML = data.info.user;
+			container.insertBefore(new_element, container.firstChild);
+			 }
+	);
+	
+	channel.bind('pusher:member_removed', function(data) {
+			return (elem=document.getElementById("sub".data.info.user)).parentNode.removeChild(elem);
+			 }
+	);
+	
+// get the active current roster
 	$.getJSON('./getusers?room={{room}}', function(data) {
     	$.each(data.users, function(index, val) {
-    		var container = document.getElementById('roster');
+    		var container = document.getElementById('active-roster');
 			var new_element = document.createElement('li');
 			new_element.setAttribute("id", val);
 			new_element.innerHTML = val;
 			container.insertBefore(new_element, container.firstChild);
   		});
 	});
-
 	
+// get the subscribed current roster
+	channel.members.each(function(member) {
+	    	var container = document.getElementById('sub-roster');
+			var new_element = document.createElement('li');
+			new_element.setAttribute("id", member.user);
+			new_element.innerHTML = member.user;
+			container.insertBefore(new_element, container.firstChild);
+	});
+
 	
 
     Twilio.Device.setup('{{token}}');
@@ -113,8 +135,11 @@ function ptt_off(){
 <div id="room"></div><br>
 <div id="talking"></div>
 <button class="ptt" id="ptt" onmousedown="ptt_on()" onmouseup="ptt_off()">PUSH TO TALK</button>
-<h4>Members</h4>
-<ul id="roster">
+<h4>Active Members</h4>
+<ul id="active-roster">
+</ul>
+<h4>Subscribed Members</h4>
+<ul id="sub-roster">
 </ul>
 
 
