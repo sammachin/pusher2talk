@@ -28,7 +28,7 @@
 	channel.bind('join', function(data) {
 			var container = document.getElementById('active-roster');
 			var new_element = document.createElement('li');
-			new_element.setAttribute("id", "active".data.user);
+			new_element.setAttribute("id", "active" + data.user);
 			new_element.innerHTML = data.user;
 			container.insertBefore(new_element, container.firstChild);
 			 }
@@ -41,7 +41,7 @@
 	channel.bind('pusher:member_added', function(data) {
 			var container = document.getElementById('sub-roster');
 			var new_element = document.createElement('li');
-			new_element.setAttribute("id", "sub".data.info.user);
+			new_element.setAttribute("id", "sub" + data.info.user);
 			new_element.innerHTML = data.info.user;
 			container.insertBefore(new_element, container.firstChild);
 			 }
@@ -57,7 +57,7 @@
     	$.each(data.users, function(index, val) {
     		var container = document.getElementById('active-roster');
 			var new_element = document.createElement('li');
-			new_element.setAttribute("id", val);
+			new_element.setAttribute("id", "active" + val);
 			new_element.innerHTML = val;
 			container.insertBefore(new_element, container.firstChild);
   		});
@@ -67,7 +67,7 @@
 	channel.members.each(function(member) {
 	    	var container = document.getElementById('sub-roster');
 			var new_element = document.createElement('li');
-			new_element.setAttribute("id", member.user);
+			new_element.setAttribute("id", "sub" + member.info.user);
 			new_element.innerHTML = member.user;
 			container.insertBefore(new_element, container.firstChild);
 	});
