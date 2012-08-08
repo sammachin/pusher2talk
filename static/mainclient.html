@@ -101,6 +101,8 @@
 		console.log("Twilio Client Connected");
 		status = "active";
         $("#room").text("Connected: {{room}}");
+		console.log("Conn Status = " +conn.status);
+		
     });
 
 	Twilio.Device.disconnect(function (conn) {
@@ -116,14 +118,11 @@ function connect(){
 		  room: "{{room}}",
 		  user: "{{user}}"
 		});
-	console.log("Conn Status = " +conn.status);
 }
 
 function StartIdleTimer(){
 	timeout=setTimeout(function(){
-		console.log("Idle Timeout Triggered");
 		conn.disconnect();
-		console.log("Conn Status = " +conn.status);
 		},10000);
 	console.log("Idle Timeout Started");
 	console.log(timeout);
@@ -133,7 +132,7 @@ function StartIdleTimer(){
 function ptt_on(){
 	if (status = "idle")
 	  {
-		  	console.log("Conn Status = " +conn.status);
+			console.log("Status is idle so connecting");
 			connect();
 	  }
 	else
