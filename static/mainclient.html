@@ -130,21 +130,24 @@ function StartIdleTimer(){
 
 
 function ptt_on(){
-	if (status = "idle")
+	if (conn.status() = 'open')
 	  {
-			console.log("Status is idle so connecting");
-			connect();
+			console.log("Status is active so already connected");
+			conn.unmute();
+			channel.trigger('client-talk', { "user" : "{{user}}" });
+			var sound = document.getElementById("sound1");
+			sound.Play();
+		}
 	  }
 	else
 	  {
-	  		console.log("Status is active so already connected");
-			conn.unmute()
-	
+	  		console.log("Status is idle connecting");
+			connect();
+			channel.trigger('client-talk', { "user" : "{{user}}" });
+			var sound = document.getElementById("sound1");
+			sound.Play();
 	  }
-	channel.trigger('client-talk', { "user" : "{{user}}" });
-	var sound = document.getElementById("sound1");
-	sound.Play();
-}
+}	
 
 function ptt_off(){
   	channel.trigger('client-stop', { "user" : "{{user}}" });
