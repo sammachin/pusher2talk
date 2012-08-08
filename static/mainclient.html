@@ -11,8 +11,6 @@
 	var status = "idle";
 	var conn;
 	var timeout;
-	
-	
 	Pusher.channel_auth_endpoint = './pusherauth?user={{user}}';
 	var pusher = new Pusher('c75e1662bedf930571b3');
 	var channel = pusher.subscribe("presence-{{room}}");
@@ -21,7 +19,9 @@
 	channel.bind('client-talk', function(data) {
 			if (status = "idle")
 			  {
-			  connect();
+			  	console.log("Status is idle so reconnecting");
+			  	connect();
+				conn.mute()
 			  }
 			document.getElementById('talking').innerHTML = "Speaking:" + data.user;
 			document.getElementById('ptt').style.visibility = 'hidden';
@@ -99,7 +99,6 @@
 
     Twilio.Device.connect(function (conn) {
 		console.log("Twilio Client Connected");
-		conn.mute()
 		status = "active";
         $("#room").text("Connected: {{room}}");
     });
@@ -110,6 +109,8 @@
         $("#room").text("Idle: {{room}}");
     });
 
+
+//  These functions to control the session
 function connect(){
 	conn = Twilio.Device.connect({
 		  room: "{{room}}",
@@ -126,14 +127,20 @@ function StartIdleTimer(){
 	console.log(timeout);
 }
 
-// Just these functions to control the session
+
 function ptt_on(){
 	if (status = "idle")
 	  {
-	  connect();
+		  	console.log("Status is idle so reconnecting");
+			connect();
+	  }
+	else
+	  {
+	  		console.log("Status is active so already connected");
+			conn.unmute()
+	
 	  }
 	channel.trigger('client-talk', { "user" : "{{user}}" });
-	conn.unmute()
 	var sound = document.getElementById("sound1");
 	sound.Play();
 }
