@@ -121,8 +121,10 @@ function connect(){
 }
 
 function StartIdleTimer(){
+	timeout = "set";
 	timeout=setTimeout(function(){
 		conn.disconnect();
+		timeout = "cleared";
 		},10000);
 	console.log("Idle Timeout Started");
 	console.log(timeout);
@@ -146,6 +148,10 @@ function ptt_on(){
 			var sound = document.getElementById("sound1");
 			sound.Play();
 	  }
+	if (timeout == 'set') {
+		clearTimeout(timeout);
+		timeout = "cleared";
+	}
 }	
 
 function ptt_off(){
