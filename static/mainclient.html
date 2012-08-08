@@ -19,7 +19,10 @@
 
 
 	channel.bind('client-talk', function(data) {
-			
+			if (status = "idle")
+			  {
+			  connect();
+			  }
 			document.getElementById('talking').innerHTML = "Speaking:" + data.user;
 			document.getElementById('ptt').style.visibility = 'hidden';
 	   		}
@@ -29,7 +32,7 @@
 			document.getElementById('ptt').style.visibility = 'visible';
 			var sound = document.getElementById("sound2");
 			sound.Play();
-			timeout=setTimeout(disconnect(),30000);	
+			timeout=setTimeout(disconnect(),10000);	
 			 }
 	);
 	channel.bind('join', function(data) {
@@ -102,7 +105,6 @@
 
 	Twilio.Device.disconnect(function (conn) {
 		console.log(conn.status);
-		conn.mute()
 		status = "idle";
         $("#room").text("Idle: {{room}}");
     });
