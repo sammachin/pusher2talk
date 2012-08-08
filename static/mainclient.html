@@ -64,6 +64,7 @@
 		
 	channel.bind('pusher:subscription_succeeded', function(members) {
 		status = "idle";
+		$("#room").text("Logged In: {{room}}");
 		members.each(function(member) {
 	    	var container = document.getElementById('sub-roster');
 			var new_element = document.createElement('li');
@@ -97,14 +98,14 @@
     });
 
     Twilio.Device.connect(function (conn) {
-		console.log(conn.status);
+		console.log("Twilio Client Connected");
 		conn.mute()
 		status = "active";
         $("#room").text("Connected: {{room}}");
     });
 
 	Twilio.Device.disconnect(function (conn) {
-		console.log(conn.status);
+		console.log("Twilio Client Disconnected");
 		status = "idle";
         $("#room").text("Idle: {{room}}");
     });
@@ -138,7 +139,10 @@ function ptt_off(){
 	conn.mute()
 	var sound = document.getElementById("sound2");
 	sound.Play();
-	timeout=setTimeout(function(){disconnect()},30000);	
+	timeout=setTimeout(function(){disconnect()},30000);
+	console.log("Idle Timeout Started");
+	console.log(timeout);
+	
 }
 
 </script>
