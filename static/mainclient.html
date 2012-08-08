@@ -119,7 +119,7 @@ function connect(){
 
 function StartIdleTimer(){
 	timeout=setTimeout(function(){
-		alert("dropping twilio");
+		console.log("Idle Timeout Triggered");
 		conn.disconnect();
 		},10000);
 	console.log("Idle Timeout Started");
