@@ -11,6 +11,7 @@
 	var status;
 	var conn;
 	var timeout;
+	var timeoutstate;
 	Pusher.channel_auth_endpoint = './pusherauth?user={{user}}';
 	var pusher = new Pusher('c75e1662bedf930571b3');
 	var channel = pusher.subscribe("presence-{{room}}");
@@ -121,10 +122,10 @@ function connect(){
 }
 
 function StartIdleTimer(){
-	timeout = "set";
+	timeoutstate = "set";
 	timeout=setTimeout(function(){
 		conn.disconnect();
-		timeout = "cleared";
+		timeoutstate = "cleared";
 		},10000);
 	console.log("Idle Timeout Started");
 	console.log(timeout);
@@ -148,9 +149,9 @@ function ptt_on(){
 			var sound = document.getElementById("sound1");
 			sound.Play();
 	  }
-	if (timeout == 'set') {
+	if (timeoutstate == 'set') {
 		clearTimeout(timeout);
-		timeout = "cleared";
+		timeoutstate = "cleared";
 	}
 }	
 
