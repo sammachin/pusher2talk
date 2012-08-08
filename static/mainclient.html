@@ -13,7 +13,7 @@
 	var timeout;
 	
 	
-	Pusher.channel_auth_endpoint = '/pusher2talk/pusherauth?user={{user}}';
+	Pusher.channel_auth_endpoint = './pusherauth?user={{user}}';
 	var pusher = new Pusher('c75e1662bedf930571b3');
 	var channel = pusher.subscribe("presence-{{room}}");
 
