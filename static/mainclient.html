@@ -130,18 +130,18 @@ function StartIdleTimer(){
 
 
 function ptt_on(){
-	if (conn.status() == 'open')
+	if (status == 'idle')
 	  {
-			console.log("Status is active so already connected");
-			conn.unmute();
+			console.log("Status is idle connecting");
+			connect();
 			channel.trigger('client-talk', { "user" : "{{user}}" });
 			var sound = document.getElementById("sound1");
 			sound.Play();
 	  }
 	else
 	  {
-	  		console.log("Status is idle connecting");
-			connect();
+	  		console.log("Status is active");
+			conn.unmute();
 			channel.trigger('client-talk', { "user" : "{{user}}" });
 			var sound = document.getElementById("sound1");
 			sound.Play();
