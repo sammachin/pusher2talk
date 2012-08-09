@@ -128,7 +128,6 @@ function StartIdleTimer(){
 		timeoutstate = "cleared";
 		},10000);
 	console.log("Idle Timeout Started");
-	console.log(timeout);
 }
 
 
@@ -152,7 +151,7 @@ function ptt_on(){
 	if (timeoutstate == 'set') {
 		clearTimeout(timeout);
 		timeoutstate = "cleared";
-		console.log("Timeoute Cleared");
+		console.log("Timeout Cleared");
 	}
 }	
 
