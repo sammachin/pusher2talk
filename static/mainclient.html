@@ -9,6 +9,7 @@
 // All the setup & connection done on load
 
 	var status;
+	var mode;
 	var conn;
 	var timeout;
 	var timeoutstate;
@@ -103,6 +104,10 @@
 		status = "active";
         $("#room").text("Connected: {{room}}");
 		console.log("Conn Status = " + conn.status());
+		if (mode == "tx"){
+			var sound = document.getElementById("sound1");
+			sound.Play();
+		}
 		
     });
 
@@ -132,17 +137,16 @@ function StartIdleTimer(){
 
 
 function ptt_on(){
+	mode = "tx";
 	if (status == 'idle')
 	  {
 			console.log("Status is idle connecting");
 			connect();
 			channel.trigger('client-talk', { "user" : "{{user}}" });
-			var sound = document.getElementById("sound1");
-			sound.Play();
 	  }
 	else
 	  {
-	  		console.log("Status is active");
+			console.log("Status is active");
 			conn.unmute();
 			channel.trigger('client-talk', { "user" : "{{user}}" });
 			var sound = document.getElementById("sound1");
@@ -161,6 +165,7 @@ function ptt_off(){
 	var sound = document.getElementById("sound2");
 	sound.Play();
 	StartIdleTimer();
+	mode = "rx";
 }
 
 </script>
