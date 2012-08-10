@@ -101,7 +101,7 @@
 
     Twilio.Device.connect(function (conn) {
 		console.log("Twilio Client Connected");
-		conn.sounds.outgoing(false); 
+		//conn.sounds.outgoing(false); 
 		status = "active";
         $("#room").text("Connected: {{room}}");
 		console.log("Conn Status = " + conn.status());
