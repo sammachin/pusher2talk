@@ -105,11 +105,8 @@
 		status = "active";
         $("#room").text("Connected: {{room}}");
 		console.log("Conn Status = " + conn.status());
-		if (mode == "tx"){
-			setTimeout(800, function(){
-				var sound = document.getElementById("sound1");
-				sound.Play();
-			});
+		var sound = document.getElementById("sound1");
+		sound.Play();
 		}
 		
     });
