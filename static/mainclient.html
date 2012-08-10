@@ -107,9 +107,7 @@
 		console.log("Conn Status = " + conn.status());
 		var sound = document.getElementById("sound1");
 		sound.Play();
-		}
-		
-    });
+	});
 
 	Twilio.Device.disconnect(function (conn) {
 		console.log("Twilio Client Disconnected");
