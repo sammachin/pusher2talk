@@ -90,6 +90,9 @@
 // Setup Twilio client
     Twilio.Device.setup('{{token}}');
 
+	Twilio.Device.sounds.outgoing(false);
+	Twilio.Device.sounds.disconnect(false);
+
     Twilio.Device.ready(function (device) {
         console.log("Twilio Client Ready");
     });
@@ -101,7 +104,6 @@
 
     Twilio.Device.connect(function (conn) {
 		console.log("Twilio Client Connected");
-		//conn.sounds.outgoing(false); 
 		status = "active";
         $("#room").text("Connected: {{room}}");
 		console.log("Conn Status = " + conn.status());
