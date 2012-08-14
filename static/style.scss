@@ -1,0 +1,159 @@
+/*
+CONTENTS
+
+1. Reset and default style
+2. Site structure
+*/
+
+$font:'Fanwood Text',serif;
+$colour:hsla(180,100%,25%,1);
+$grey:desaturate($colour,90%);
+/*font-size, rounded-corners, text-shadow, box-shadow*/
+
+/*1. RESET AND DEFAULT STYLE--------------------------------------------------------*/
+html, body, div, span, applet, object, iframe,
+header, hgroup, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, time,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, input, button,
+table, caption, tbody, tfoot, thead, tr, th, td,
+section, article, canvas, nav, footer, aside {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: normal;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    background:transparent;
+}
+
+section, header, article, hgroup
+{display:block;}
+
+html {
+    background:lighten($grey,70%);
+}
+
+body {font-size:62.5%; color:$grey; line-height:1.4; font-family:$font;
+	background:-webkit-radial-gradient(top, cover, lighten($grey,70%), lighten($grey,40%));
+}
+
+/* remember to define focus styles! */
+:focus {outline: 0;}
+
+/*text styling*/
+p {font-size:2em;}
+.lede {font-size:120%;}
+p.lede {font-size:2.2em;}
+strong, b {font-weight:bold;}
+em, i {font-style:italic;}
+dfn, abbr {border-bottom:1px dotted #111;}
+ins {border:1px dotted #111; border-width:0px 1px; padding:0px 3px; text-decoration:none; background-color:transparentize($grey,0.85);}
+small {font-size:92%;}
+code {font-family:monospace; background-color:transparentize($colour,0.85); padding:0px 3px;}
+kbd {font-family:monospace; font-size:1.2em;}
+mark {background-color:transparentize(lighten($colour,50%),0.7); padding:0px 3px;}
+sub {vertical-align:sub;}
+sup {vertical-align:super;}
+address, time {font-size:1.8em;}
+span.feature-text {font-weight:bold; font-style:italic;}
+
+/*lists*/
+ol, ul {list-style:none;}
+dl {}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {border-collapse:collapse; border-spacing:0;}
+caption, th, td {text-align:left; font-weight:normal;}
+
+/*quotes*/
+blockquote:before, blockquote:after {content:'"';}
+blockquote {quotes:'"';}
+
+/*code blocks*/
+pre {font-size:1.4em;}
+
+/*headers*/
+h1, h2, h3, h4, h5, h6 {}
+h1 {font-size:4em;}
+h2 {font-size:3.2em;}
+h3 {font-size:2.6em;}
+h4 {font-size:2.2em;}
+h5 {font-size:2em;}
+h6 {font-size:2em;}
+
+/*links*/
+a {text-decoration:none; border-bottom:1px solid $colour; color:$colour; font-weight:normal; font-size:2em;
+    -webkit-transition: color 0.3s, border 0.3s;
+}
+a:hover, a:active {border-bottom-color:lighten($colour,10%); color:lighten($colour,10%);}
+p a, h1 a, address a {font-size:1em;}
+
+/*images*/
+img {}
+
+/*forms*/
+form {width:300px; padding:20px;}
+fieldset {overflow:hidden;}
+legend {font-size:2.6em;}
+label, input, select, textarea {
+	display:inline-block; box-sizing:border-box; width:260px;
+	margin:20px;
+	font-family:$font; font-size:2em;
+}
+label {font-style:italic; margin-bottom:10px;}
+input, select, textarea {
+	padding:6px 8px; margin-top:10px; background-color:lighten($grey,70%);
+    border-radius: 4px; box-shadow:0px 0px 0px 10px transparentize($grey,0.7);
+    border:4px solid transparentize($colour,0.7);
+}
+input[type=checkbox] {width:20px; border:none;}
+input[type=color] {width:100px; height:100px}
+input[type=number] {width:100px;}
+/*focus styles*/
+input:focus, select:focus, textarea:focus {background-color:#fff;}
+/*error styles*/
+input.input-error, select.input-error, textarea.input-error {border:4px solid invert($colour);}
+
+
+/*button styles*/
+input[type="submit"], input[type="reset"], button, .button {
+	display:inline-block; padding:8px 20px;
+    color:$colour; text-decoration:none; font-family:$font; text-shadow:1px 1px 2px white;
+    border-radius:4px; box-shadow:1px 1px 3px $grey; border:none;
+    background-image:-webkit-linear-gradient(top,lighten($grey,65%),lighten($grey,55%));
+    -webkit-transition: color 0.3s, background-image 0.3s;
+}
+button {font-size:2em;}
+input[type="submit"]:hover, input[type="reset"]:hovers, button:hover, .button:hover {color:lighten($colour,10%); cursor:pointer; background-image:-webkit-linear-gradient(top,lighten($grey,70%),lighten($grey,60%));}
+
+/*SITE STRUCTURE AND MEDIA QUERIES*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+button.ptt {
+	width:200;
+}
