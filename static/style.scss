@@ -8,6 +8,7 @@ CONTENTS
 $font:'Fanwood Text',serif;
 $colour:hsla(180,100%,25%,1);
 $grey:desaturate($colour,90%);
+$buttonColour:invert(lighten($colour,15%));
 /*font-size, rounded-corners, text-shadow, box-shadow*/
 
 /*1. RESET AND DEFAULT STYLE--------------------------------------------------------*/
@@ -37,12 +38,78 @@ section, header, article, hgroup
 {display:block;}
 
 html {
-    background:lighten($grey,70%);
+    background:lighten($grey,30%);
+    background-image: -webkit-linear-gradient(40deg,transparentize($grey,0.9),transparentize($colour,0.8)),
+    -webkit-linear-gradient(135deg,
+        lighten($grey,18%) 0%,
+        lighten($grey,18%) 10%,
+        lighten($grey,25%) 11%,
+        lighten($grey,25%) 40%,
+        lighten($grey,35%) 41%,
+        lighten($grey,35%) 50%,
+        lighten($grey,18%) 51%,
+        lighten($grey,18%) 60%,
+        lighten($grey,25%) 61%,
+        lighten($grey,25%) 90%,
+        lighten($grey,35%) 91%);
+    background-image: -moz-linear-gradient(40deg,transparentize($grey,0.9),transparentize($colour,0.8)),
+    -moz-linear-gradient(135deg,
+        lighten($grey,18%) 0%,
+        lighten($grey,18%) 10%,
+        lighten($grey,25%) 11%,
+        lighten($grey,25%) 40%,
+        lighten($grey,35%) 41%,
+        lighten($grey,35%) 50%,
+        lighten($grey,18%) 51%,
+        lighten($grey,18%) 60%,
+        lighten($grey,25%) 61%,
+        lighten($grey,25%) 90%,
+        lighten($grey,35%) 91%);
+    background-image: -o-linear-gradient(40deg,transparentize($grey,0.9),transparentize($colour,0.8)),
+    -o-linear-gradient(135deg,
+        lighten($grey,18%) 0%,
+        lighten($grey,18%) 10%,
+        lighten($grey,25%) 11%,
+        lighten($grey,25%) 40%,
+        lighten($grey,35%) 41%,
+        lighten($grey,35%) 50%,
+        lighten($grey,18%) 51%,
+        lighten($grey,18%) 60%,
+        lighten($grey,25%) 61%,
+        lighten($grey,25%) 90%,
+        lighten($grey,35%) 91%);
+    background-image: -ms-linear-gradient(40deg,transparentize($grey,0.9),transparentize($colour,0.8)),
+    -ms-linear-gradient(135deg,
+        lighten($grey,18%) 0%,
+        lighten($grey,18%) 10%,
+        lighten($grey,25%) 11%,
+        lighten($grey,25%) 40%,
+        lighten($grey,35%) 41%,
+        lighten($grey,35%) 50%,
+        lighten($grey,18%) 51%,
+        lighten($grey,18%) 60%,
+        lighten($grey,25%) 61%,
+        lighten($grey,25%) 90%,
+        lighten($grey,35%) 91%);
+    background-image: linear-gradient(40deg,transparentize($grey,0.9),transparentize($colour,0.8)),
+    linear-gradient(135deg,
+        lighten($grey,18%) 0%,
+        lighten($grey,18%) 10%,
+        lighten($grey,25%) 11%,
+        lighten($grey,25%) 40%,
+        lighten($grey,35%) 41%,
+        lighten($grey,35%) 50%,
+        lighten($grey,18%) 51%,
+        lighten($grey,18%) 60%,
+        lighten($grey,25%) 61%,
+        lighten($grey,25%) 90%,
+        lighten($grey,35%) 91%);
+
+    background-size:3px 3px, 10px 10px;
 }
 
-body {font-size:62.5%; color:$grey; line-height:1.4; font-family:$font;
-	background:-webkit-radial-gradient(top, cover, lighten($grey,70%), lighten($grey,40%));
-}
+body {font-size:62.5%; color:$grey; line-height:1; font-family:$font;
+    text-shadow:1px 1px 1px lighten($colour,70%);}
 
 /* remember to define focus styles! */
 :focus {outline: 0;}
@@ -65,8 +132,21 @@ address, time {font-size:1.8em;}
 span.feature-text {font-weight:bold; font-style:italic;}
 
 /*lists*/
-ol, ul {list-style:none;}
-dl {}
+ol, ul, dl {list-style:none; margin:10px 0px 20px 10px;}
+ol {list-style:lower-roman; margin-left:40px;}
+li, dt, dd {font-size:2em; line-height:1.6;}
+ul > li {
+    padding-left:24px;
+    margin:10px 0px;
+    line-height:1.4;
+    border-radius:8px;
+    background-image: -webkit-linear-gradient(left,transparentize($grey,0.7) 12px, transparentize($colour,0.7) 13px, transparentize($colour,0.7) 16px, transparent 17px);
+    background-image: -moz-linear-gradient(left,transparentize($grey,0.7) 12px, transparentize($colour,0.7) 13px, transparentize($colour,0.7) 16px, transparent 17px);
+    background-image: -o-linear-gradient(left,transparentize($grey,0.7) 12px, transparentize($colour,0.7) 13px, transparentize($colour,0.7) 16px, transparent 17px);
+    background-image: -ms-linear-gradient(left,transparentize($grey,0.7) 12px, transparentize($colour,0.7) 13px, transparentize($colour,0.7) 16px, transparent 17px);
+    background-image:linear-gradient(left,transparentize($grey,0.7) 12px, transparentize($colour,0.7) 13px, transparentize($colour,0.7) 16px, transparent 17px);
+}
+dl > dd {margin-bottom:0px; padding-left:20px;}
 
 /* tables still need 'cellspacing="0"' in the markup */
 table {border-collapse:collapse; border-spacing:0;}
@@ -80,6 +160,7 @@ blockquote {quotes:'"';}
 pre {font-size:1.4em;}
 
 /*headers*/
+header {}
 h1, h2, h3, h4, h5, h6 {}
 h1 {font-size:4em;}
 h2 {font-size:3.2em;}
@@ -89,8 +170,14 @@ h5 {font-size:2em;}
 h6 {font-size:2em;}
 
 /*links*/
-a {text-decoration:none; border-bottom:1px solid $colour; color:$colour; font-weight:normal; font-size:2em;
+a {text-decoration:none;
+    border-bottom:1px solid $colour;
+    color:$colour; font-weight:normal; font-size:2em;
     -webkit-transition: color 0.3s, border 0.3s;
+    -moz-transition: color 0.3s, border 0.3s;
+    -o-transition: color 0.3s, border 0.3s;
+    -ms-transition: color 0.3s, border 0.3s;
+    transition: color 0.3s, border 0.3s;
 }
 a:hover, a:active {border-bottom-color:lighten($colour,10%); color:lighten($colour,10%);}
 p a, h1 a, address a {font-size:1em;}
@@ -99,15 +186,15 @@ p a, h1 a, address a {font-size:1em;}
 img {}
 
 /*forms*/
-form {width:300px; padding:20px;}
+form {width:100%;}
 fieldset {overflow:hidden;}
-legend {font-size:2.6em;}
+legend {font-size:2.6em; display:none;}
 label, input, select, textarea {
-	display:inline-block; box-sizing:border-box; width:260px;
-	margin:20px;
+	display:inline-block; box-sizing:border-box; width:360px;
+	margin:20px 10px;
 	font-family:$font; font-size:2em;
 }
-label {font-style:italic; margin-bottom:10px;}
+label {font-style:italic; margin-bottom:10px; color:lighten($colour,5%);}
 input, select, textarea {
 	padding:6px 8px; margin-top:10px; background-color:lighten($grey,70%);
     border-radius: 4px; box-shadow:0px 0px 0px 10px transparentize($grey,0.7);
@@ -123,37 +210,104 @@ input.input-error, select.input-error, textarea.input-error {border:4px solid in
 
 
 /*button styles*/
-input[type="submit"], input[type="reset"], button, .button {
-	display:inline-block; padding:8px 20px;
+input[type="submit"], input[type="reset"], .button {
+    display:inline-block; padding:8px 20px;
     color:$colour; text-decoration:none; font-family:$font; text-shadow:1px 1px 2px white;
     border-radius:4px; box-shadow:1px 1px 3px $grey; border:none;
-    background-image:-webkit-linear-gradient(top,lighten($grey,65%),lighten($grey,55%));
+    background-image: -webkit-linear-gradient(top,lighten($grey,65%),lighten($grey,55%));
+    background-image: -moz-linear-gradient(top,lighten($grey,65%),lighten($grey,55%));
+    background-image: -o-linear-gradient(top,lighten($grey,65%),lighten($grey,55%));
+    background-image: -ms-linear-gradient(top,lighten($grey,65%),lighten($grey,55%));
+    background-image:linear-gradient(top,lighten($grey,65%),lighten($grey,55%));
     -webkit-transition: color 0.3s, background-image 0.3s;
+    -moz-transition: color 0.3s, background-image 0.3s;
+    -o-transition: color 0.3s, background-image 0.3s;
+    -ms-transition: color 0.3s, background-image 0.3s;
+    transition: color 0.3s, background-image 0.3s;
 }
-button {font-size:2em;}
-input[type="submit"]:hover, input[type="reset"]:hovers, button:hover, .button:hover {color:lighten($colour,10%); cursor:pointer; background-image:-webkit-linear-gradient(top,lighten($grey,70%),lighten($grey,60%));}
+input[type="submit"]:hover, input[type="reset"]:hover, .button:hover {color:lighten($colour,10%);
+    cursor:pointer;
+    background-image: -webkit-linear-gradient(top,lighten($grey,70%),lighten($grey,60%));
+    background-image: -moz-linear-gradient(top,lighten($grey,70%),lighten($grey,60%));
+    background-image: -o-linear-gradient(top,lighten($grey,70%),lighten($grey,60%));
+    background-image: -ms-linear-gradient(top,lighten($grey,70%),lighten($grey,60%));
+    background-image:linear-gradient(top,lighten($grey,70%),lighten($grey,60%));}
+
+footer {padding-top:10px; text-align:right;}
 
 /*SITE STRUCTURE AND MEDIA QUERIES*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-button.ptt {
-	width:200;
+#wrapper {
+    background-image: -webkit-radial-gradient(top, cover, transparentize(lighten($grey,70%),0.2), transparentize(lighten($grey,40%),0.2))
+    ;
+    background-image: -moz-radial-gradient(top, cover, transparentize(lighten($grey,70%),0.2), transparentize(lighten($grey,40%),0.2))
+    ;
+    background-image: -o-radial-gradient(top, cover, transparentize(lighten($grey,70%),0.2), transparentize(lighten($grey,40%),0.2))
+    ;
+    background-image: -ms-radial-gradient(top, cover, transparentize(lighten($grey,70%),0.2), transparentize(lighten($grey,40%),0.2))
+    ;
+    background-image: radial-gradient(top, cover, transparentize(lighten($grey,70%),0.2), transparentize(lighten($grey,40%),0.2))
+    ;
+    width:380px; margin:40px auto; padding:40px;
+    border-radius:8px; box-shadow:0px 0px 0px 10px transparentize($grey,0.7);
 }
+
+button {
+  font-family:$font; font-size:3.8em; text-align:center;
+  color:lighten($grey,70%); text-shadow:-1px -1px 1px hsla(350,0%,0%,0.7), 1px 1px 1px hsla(350,0%,100%,0.3);
+  display:block; margin:0px 0px 40px; padding:23px 37px 25px 35px; width:380px;
+  cursor:pointer;
+  background-color:invert($colour);
+  background-image: -webkit-linear-gradient(273deg,lighten($buttonColour,10%) 30%, $buttonColour 40%);
+    background-image: -moz-linear-gradient(273deg,lighten($buttonColour,10%) 30%, $buttonColour 40%);
+    background-image: -o-linear-gradient(273deg,lighten($buttonColour,10%) 30%, $buttonColour 40%);
+    background-image: -ms-linear-gradient(273deg,lighten($buttonColour,10%) 30%, $buttonColour 40%);
+    background-image: linear-gradient(273deg,lighten($buttonColour,10%) 30%, $buttonColour 40%);
+  border:none; border-radius:16px;
+  box-shadow:
+    inset 0px 0px 1px 1px hsla(0,80%,30%,0.9),
+    inset 0px 0px 2px 3px hsla(0,80%,50%,0.9),
+    inset 1px 1px 1px 4px hsla(0,80%,100%,0.8),
+    inset 0px 0px 2px 7px hsla(0,80%,60%,0.8),
+    inset 0px 0px 4px 10px hsla(0,80%,50%,0.9),
+    8px 10px 2px 6px hsla(0,80%,20%,0.55),
+    0px 0px 3px 2px hsla(0,80%,40%,0.9),
+    0px 0px 2px 6px hsla(0,80%,50%,0.9),
+    -1px -1px 1px 6px hsla(0,80%,100%,0.9),
+    0px 0px 2px 11px hsla(0,80%,50%,0.9),
+    0px 0px 1px 12px hsla(0,80%,40%,0.9),
+    1px 3px 14px 14px hsla(0,80%,0%,0.4)
+  ;
+  -webkit-transition:none;
+  -moz-transition:none;
+    -o-transition:none;
+    -ms-transition:none;
+    transition:none;
+}
+
+button:active {
+  color:hsla(350,0%,85%,1); padding:26px 34px 22px 38px;
+  background-image: -webkit-linear-gradient(273deg, $buttonColour 50%, lighten($buttonColour, 5%) 60%);
+    background-image: -moz-linear-gradient(273deg, $buttonColour 50%, lighten($buttonColour, 5%) 60%);
+    background-image: -o-linear-gradient(273deg, $buttonColour 50%, lighten($buttonColour, 5%) 60%);
+    background-image: -ms-linear-gradient(273deg, $buttonColour 50%, lighten($buttonColour, 5%) 60%);
+    background-image: linear-gradient(273deg, $buttonColour 50%, lighten($buttonColour, 5%) 60%);
+
+  box-shadow:
+    inset 3px 4px 3px 2px hsla(0,80%,20%,0.55),
+    inset 0px 0px 1px 1px hsla(0,80%,30%,0.9),
+    inset -1px -1px 2px 3px hsla(0,80%,50%,0.9),
+    inset -2px -2px 1px 3px hsla(0,80%,100%,0.8),
+    inset 0px 0px 2px 7px hsla(0,80%,60%,0.8),
+    inset 0px 0px 3px 10px hsla(0,80%,50%,0.9),
+    
+    0px 0px 3px 2px hsla(0,80%,40%,0.9),
+    0px 0px 2px 6px hsla(0,80%,50%,0.9),
+    -1px -1px 1px 6px hsla(0,80%,100%,0.9),
+    0px 0px 2px 11px hsla(0,80%,50%,0.9),
+    0px 0px 1px 12px hsla(0,80%,40%,0.9),
+    1px 3px 14px 14px hsla(0,80%,0%,0.4)
+  ;
+}
+
+
