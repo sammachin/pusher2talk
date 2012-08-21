@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+<<<<<<< HEAD
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="content-language" content="en-english">
     <meta name="author" content="Sam Machin">
@@ -21,27 +22,24 @@
 		window.open(url);
 	}
 	</script>
+=======
+<title>VoxIRC</title>
+<script>
+function doConnect(){
+	var url = "http://voxirc.sammachin.com/main?id="+ document.forms.join.room.value + "." + document.forms.join.user.value;
+	window.open(url);
+}
+</script>
+>>>>>>> parent of 02336a7... Merge pull request #1 from Rumyra/master
 </head>
 <body>
-	<div id="wrapper">
-		<header role="banner">
-			<h1>VoxIRC</h1>
-		</header>
+<h1>VoxIRC</h1>
+<h4>by <a href="http://sammachin.com:">Sam Machin</a></h4>
 
-		<section>
-			<form name="join">
-				<fieldset><legend>Join</legend>
-					<label for="room">Channel</label>
-					<input type="text" id="room" size="12" placeholder="channelname" />
-					<label>Username</label>
-					<input type="text" id="user" size="12" placeholder="username" />
-				<input type="submit" value="Connect" onclick="doConnect()">
-			</form>
-		</section>
-
-		<footer>
-			<p>Created by <a href="http://sammachin.com:">Sam Machin</a></p>
-		</footer>
-	</div>
+<form name="join">
+	<input type="text" id="room" size="12" placeholder="channel"><br>
+	<input type="text" id="user" size="12" placeholder="username"><br>
+	<input type=button value="Connect" onclick="doConnect()">  
+</form>
 </body>
 
