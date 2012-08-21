@@ -1,3 +1,329 @@
-button.ptt {
-	width="200"
-}
+/*
+CONTENTS
+
+1. Reset and default style
+2. Site structure
+*/
+/*font-size, rounded-corners, text-shadow, box-shadow*/
+/*1. RESET AND DEFAULT STYLE--------------------------------------------------------*/
+html, body, div, span, applet, object, iframe,
+header, hgroup, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, time,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, input, button,
+table, caption, tbody, tfoot, thead, tr, th, td,
+section, article, canvas, nav, footer, aside {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: normal;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  background: transparent; }
+
+section, header, article, hgroup {
+  display: block; }
+
+html {
+  background: #819898;
+  background-image: -webkit-linear-gradient(40deg, rgba(57, 70, 70, 0.1), rgba(0, 127, 128, 0.2)), -webkit-linear-gradient(135deg, #637979 0%, #637979 10%, #738c8c 11%, #738c8c 40%, #8fa3a3 41%, #8fa3a3 50%, #637979 51%, #637979 60%, #738c8c 61%, #738c8c 90%, #8fa3a3 91%);
+  background-image: -moz-linear-gradient(40deg, rgba(57, 70, 70, 0.1), rgba(0, 127, 128, 0.2)), -moz-linear-gradient(135deg, #637979 0%, #637979 10%, #738c8c 11%, #738c8c 40%, #8fa3a3 41%, #8fa3a3 50%, #637979 51%, #637979 60%, #738c8c 61%, #738c8c 90%, #8fa3a3 91%);
+  background-image: -o-linear-gradient(40deg, rgba(57, 70, 70, 0.1), rgba(0, 127, 128, 0.2)), -o-linear-gradient(135deg, #637979 0%, #637979 10%, #738c8c 11%, #738c8c 40%, #8fa3a3 41%, #8fa3a3 50%, #637979 51%, #637979 60%, #738c8c 61%, #738c8c 90%, #8fa3a3 91%);
+  background-image: -ms-linear-gradient(40deg, rgba(57, 70, 70, 0.1), rgba(0, 127, 128, 0.2)), -ms-linear-gradient(135deg, #637979 0%, #637979 10%, #738c8c 11%, #738c8c 40%, #8fa3a3 41%, #8fa3a3 50%, #637979 51%, #637979 60%, #738c8c 61%, #738c8c 90%, #8fa3a3 91%);
+  background-image: linear-gradient(40deg, rgba(57, 70, 70, 0.1), rgba(0, 127, 128, 0.2)), linear-gradient(135deg, #637979 0%, #637979 10%, #738c8c 11%, #738c8c 40%, #8fa3a3 41%, #8fa3a3 50%, #637979 51%, #637979 60%, #738c8c 61%, #738c8c 90%, #8fa3a3 91%);
+  background-size: 3px 3px, 10px 10px; }
+
+body {
+  font-size: 62.5%;
+  color: #394646;
+  line-height: 1;
+  font-family: "Fanwood Text", serif;
+  text-shadow: 1px 1px 1px #e5ffff; }
+
+/* remember to define focus styles! */
+:focus {
+  outline: 0; }
+
+/*text styling*/
+p {
+  font-size: 2em; }
+
+.lede {
+  font-size: 120%; }
+
+p.lede {
+  font-size: 2.2em; }
+
+strong, b {
+  font-weight: bold; }
+
+em, i {
+  font-style: italic; }
+
+dfn, abbr {
+  border-bottom: 1px dotted #111; }
+
+ins {
+  border: 1px dotted #111;
+  border-width: 0px 1px;
+  padding: 0px 3px;
+  text-decoration: none;
+  background-color: rgba(57, 70, 70, 0.15); }
+
+small {
+  font-size: 92%; }
+
+code {
+  font-family: monospace;
+  background-color: rgba(0, 127, 128, 0.15);
+  padding: 0px 3px; }
+
+kbd {
+  font-family: monospace;
+  font-size: 1.2em; }
+
+mark {
+  background-color: rgba(128, 255, 255, 0.3);
+  padding: 0px 3px; }
+
+sub {
+  vertical-align: sub; }
+
+sup {
+  vertical-align: super; }
+
+address, time {
+  font-size: 1.8em; }
+
+span.feature-text {
+  font-weight: bold;
+  font-style: italic; }
+
+/*lists*/
+ol, ul, dl {
+  list-style: none;
+  margin: 10px 0px 20px 10px; }
+
+ol {
+  list-style: lower-roman;
+  margin-left: 40px; }
+
+li, dt, dd {
+  font-size: 2em;
+  line-height: 1.6; }
+
+ul > li {
+  padding-left: 24px;
+  margin: 10px 0px;
+  line-height: 1.4;
+  border-radius: 8px;
+  background-image: -webkit-linear-gradient(left, rgba(57, 70, 70, 0.3) 12px, rgba(0, 127, 128, 0.3) 13px, rgba(0, 127, 128, 0.3) 16px, transparent 17px);
+  background-image: -moz-linear-gradient(left, rgba(57, 70, 70, 0.3) 12px, rgba(0, 127, 128, 0.3) 13px, rgba(0, 127, 128, 0.3) 16px, transparent 17px);
+  background-image: -o-linear-gradient(left, rgba(57, 70, 70, 0.3) 12px, rgba(0, 127, 128, 0.3) 13px, rgba(0, 127, 128, 0.3) 16px, transparent 17px);
+  background-image: -ms-linear-gradient(left, rgba(57, 70, 70, 0.3) 12px, rgba(0, 127, 128, 0.3) 13px, rgba(0, 127, 128, 0.3) 16px, transparent 17px);
+  background-image: linear-gradient(left, rgba(57, 70, 70, 0.3) 12px, rgba(0, 127, 128, 0.3) 13px, rgba(0, 127, 128, 0.3) 16px, transparent 17px); }
+
+dl > dd {
+  margin-bottom: 0px;
+  padding-left: 20px; }
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal; }
+
+/*quotes*/
+blockquote:before, blockquote:after {
+  content: '"'; }
+
+blockquote {
+  quotes: '"'; }
+
+/*code blocks*/
+pre {
+  font-size: 1.4em; }
+
+/*headers*/
+h1 {
+  font-size: 4em; }
+
+h2 {
+  font-size: 3.2em; }
+
+h3 {
+  font-size: 2.6em; }
+
+h4 {
+  font-size: 2.2em; }
+
+h5 {
+  font-size: 2em; }
+
+h6 {
+  font-size: 2em; }
+
+/*links*/
+a {
+  text-decoration: none;
+  border-bottom: 1px solid #007f80;
+  color: #007f80;
+  font-weight: normal;
+  font-size: 2em;
+  -webkit-transition: color 0.3s, border 0.3s;
+  -moz-transition: color 0.3s, border 0.3s;
+  -o-transition: color 0.3s, border 0.3s;
+  -ms-transition: color 0.3s, border 0.3s;
+  transition: color 0.3s, border 0.3s; }
+
+a:hover, a:active {
+  border-bottom-color: #00b2b3;
+  color: #00b2b3; }
+
+p a, h1 a, address a {
+  font-size: 1em; }
+
+/*images*/
+/*forms*/
+form {
+  width: 100%; }
+
+fieldset {
+  overflow: hidden; }
+
+legend {
+  font-size: 2.6em;
+  display: none; }
+
+label, input, select, textarea {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 360px;
+  margin: 20px 10px;
+  font-family: "Fanwood Text", serif;
+  font-size: 2em; }
+
+label {
+  font-style: italic;
+  margin-bottom: 10px;
+  color: #009999; }
+
+input, select, textarea {
+  padding: 6px 8px;
+  margin-top: 10px;
+  background-color: #f1f4f4;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 10px rgba(57, 70, 70, 0.3);
+  border: 4px solid rgba(0, 127, 128, 0.3); }
+
+input[type=checkbox] {
+  width: 20px;
+  border: none; }
+
+input[type=color] {
+  width: 100px;
+  height: 100px; }
+
+input[type=number] {
+  width: 100px; }
+
+/*focus styles*/
+input:focus, select:focus, textarea:focus {
+  background-color: #fff; }
+
+/*error styles*/
+input.input-error, select.input-error, textarea.input-error {
+  border: 4px solid #ff807f; }
+
+/*button styles*/
+input[type="submit"], input[type="reset"], .button {
+  display: inline-block;
+  padding: 8px 20px;
+  color: #007f80;
+  text-decoration: none;
+  font-family: "Fanwood Text", serif;
+  text-shadow: 1px 1px 2px white;
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px #394646;
+  border: none;
+  background-image: -webkit-linear-gradient(top, #e3e8e8, #c7d1d1);
+  background-image: -moz-linear-gradient(top, #e3e8e8, #c7d1d1);
+  background-image: -o-linear-gradient(top, #e3e8e8, #c7d1d1);
+  background-image: -ms-linear-gradient(top, #e3e8e8, #c7d1d1);
+  background-image: linear-gradient(top, #e3e8e8, #c7d1d1);
+  -webkit-transition: color 0.3s, background-image 0.3s;
+  -moz-transition: color 0.3s, background-image 0.3s;
+  -o-transition: color 0.3s, background-image 0.3s;
+  -ms-transition: color 0.3s, background-image 0.3s;
+  transition: color 0.3s, background-image 0.3s; }
+
+input[type="submit"]:hover, input[type="reset"]:hover, .button:hover {
+  color: #00b2b3;
+  cursor: pointer;
+  background-image: -webkit-linear-gradient(top, #f1f4f4, #d5dddd);
+  background-image: -moz-linear-gradient(top, #f1f4f4, #d5dddd);
+  background-image: -o-linear-gradient(top, #f1f4f4, #d5dddd);
+  background-image: -ms-linear-gradient(top, #f1f4f4, #d5dddd);
+  background-image: linear-gradient(top, #f1f4f4, #d5dddd); }
+
+footer {
+  padding-top: 10px;
+  text-align: right; }
+
+/*SITE STRUCTURE AND MEDIA QUERIES*/
+#wrapper {
+  background-image: -webkit-radial-gradient(top, cover, rgba(241, 244, 244, 0.8), rgba(157, 175, 175, 0.8));
+  background-image: -moz-radial-gradient(top, cover, rgba(241, 244, 244, 0.8), rgba(157, 175, 175, 0.8));
+  background-image: -o-radial-gradient(top, cover, rgba(241, 244, 244, 0.8), rgba(157, 175, 175, 0.8));
+  background-image: -ms-radial-gradient(top, cover, rgba(241, 244, 244, 0.8), rgba(157, 175, 175, 0.8));
+  background-image: radial-gradient(top, cover, rgba(241, 244, 244, 0.8), rgba(157, 175, 175, 0.8));
+  width: 380px;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 0px 10px rgba(57, 70, 70, 0.3); }
+
+button {
+  font-family: "Fanwood Text", serif;
+  font-size: 3.8em;
+  text-align: center;
+  color: #f1f4f4;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.3);
+  display: block;
+  margin: 0px 0px 40px;
+  padding: 23px 37px 25px 35px;
+  width: 380px;
+  cursor: pointer;
+  background-color: #ff807f;
+  background-image: -webkit-linear-gradient(273deg, #ff6666 30%, #ff3333 40%);
+  background-image: -moz-linear-gradient(273deg, #ff6666 30%, #ff3333 40%);
+  background-image: -o-linear-gradient(273deg, #ff6666 30%, #ff3333 40%);
+  background-image: -ms-linear-gradient(273deg, #ff6666 30%, #ff3333 40%);
+  background-image: linear-gradient(273deg, #ff6666 30%, #ff3333 40%);
+  border: none;
+  border-radius: 16px;
+  box-shadow: inset 0px 0px 1px 1px rgba(138, 15, 15, 0.9), inset 0px 0px 2px 3px rgba(230, 25, 25, 0.9), inset 1px 1px 1px 4px rgba(255, 255, 255, 0.8), inset 0px 0px 2px 7px rgba(235, 71, 71, 0.8), inset 0px 0px 4px 10px rgba(230, 25, 25, 0.9), 8px 10px 2px 6px rgba(92, 10, 10, 0.55), 0px 0px 3px 2px rgba(184, 20, 20, 0.9), 0px 0px 2px 6px rgba(230, 25, 25, 0.9), -1px -1px 1px 6px rgba(255, 255, 255, 0.9), 0px 0px 2px 11px rgba(230, 25, 25, 0.9), 0px 0px 1px 12px rgba(184, 20, 20, 0.9), 1px 3px 14px 14px rgba(0, 0, 0, 0.4);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  -ms-transition: none;
+  transition: none; }
+
+button:active {
+  color: #d9d9d9;
+  padding: 26px 34px 22px 38px;
+  background-image: -webkit-linear-gradient(273deg, #ff3333 50%, #ff4d4d 60%);
+  background-image: -moz-linear-gradient(273deg, #ff3333 50%, #ff4d4d 60%);
+  background-image: -o-linear-gradient(273deg, #ff3333 50%, #ff4d4d 60%);
+  background-image: -ms-linear-gradient(273deg, #ff3333 50%, #ff4d4d 60%);
+  background-image: linear-gradient(273deg, #ff3333 50%, #ff4d4d 60%);
+  box-shadow: inset 3px 4px 3px 2px rgba(92, 10, 10, 0.55), inset 0px 0px 1px 1px rgba(138, 15, 15, 0.9), inset -1px -1px 2px 3px rgba(230, 25, 25, 0.9), inset -2px -2px 1px 3px rgba(255, 255, 255, 0.8), inset 0px 0px 2px 7px rgba(235, 71, 71, 0.8), inset 0px 0px 3px 10px rgba(230, 25, 25, 0.9), 0px 0px 3px 2px rgba(184, 20, 20, 0.9), 0px 0px 2px 6px rgba(230, 25, 25, 0.9), -1px -1px 1px 6px rgba(255, 255, 255, 0.9), 0px 0px 2px 11px rgba(230, 25, 25, 0.9), 0px 0px 1px 12px rgba(184, 20, 20, 0.9), 1px 3px 14px 14px rgba(0, 0, 0, 0.4); }
