@@ -34,6 +34,7 @@
 	Twilio.Device.sounds.disconnect(false);
 
     Twilio.Device.ready(function (device) {
+		status = "idle";
         console.log("Twilio Client Ready");
     });
 
