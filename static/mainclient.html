@@ -20,7 +20,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
 <script type="text/javascript">
-// All the setup & connection done on load
+/All the setup & connection done on load/
 
 	var status;
 	var mode;
@@ -90,7 +90,8 @@
 		});
 	});
 
-// get the active current roster of users on the conf call
+/get the active current roster of users on the conf call/
+
 		$.getJSON('./getusers?room={{room}}', function(data) {
 	    	$.each(data.users, function(index, val) {
 	    		var container = document.getElementById('active-roster');
@@ -101,9 +102,12 @@
 	  		});
 		});	
 
-// Setup Twilio client
+/Setup Twilio client/
+
     Twilio.Device.setup('{{token}}');
+
 	Twilio.Device.sounds.outgoing(false);
+	
 	Twilio.Device.sounds.disconnect(false);
 
     Twilio.Device.ready(function (device) {
@@ -131,7 +135,7 @@
     });
 
 
-//  These functions to control the session
+/ These functions to control the session/
 function connect(){
 	conn = Twilio.Device.connect({
 		  room: "{{room}}",
