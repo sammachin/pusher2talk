@@ -128,8 +128,10 @@ class start(object):
 	def test(self, var=None, **params):
 		room = str(urllib.unquote(cherrypy.request.params['room']))
 		user = str(urllib.unquote(cherrypy.request.params['user']))
-		template_values = {"room": room, "user" : user}
-		t = loader.get_template('listtest.html')
+		capability = TwilioCapability(account, token)
+		capability.allow_client_outgoing(application_sid)
+		template_values = {"token": capability.generate(), "room" : room, "user": user}
+		t = loader.get_template('test.html')
 		c = Context(template_values)
 		return t.render(c)
 	index.exposed = True

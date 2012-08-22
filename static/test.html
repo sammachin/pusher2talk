@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="en-english">
+    <meta name="author" content="Sam Machin">
+    <meta name="copyright" content="Built by Sam Machin, made pretty by Ruth John, England, 2012">
+    <meta name="keywords" content="VOX, IRC, voice over">
+    <meta name="description" content="A little app for talking to others using an IRC channel.">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    
+    <link href='http://fonts.googleapis.com/css?family=Fanwood+Text:400,400italic' rel='stylesheet' type='text/css'>
+
+
+<title>VoxIRCTest - {{room}}</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
+<script type="text/javascript">
+
+/All the setup & connection done on load/
+
+	var status;
+	var mode;
+	var conn;
+	var timeout;
+	var timeoutstate;
+	
+/Setup Twilio client/
+
+    Twilio.Device.setup('{{token}}');
+
+	Twilio.Device.sounds.outgoing(false);
+	
+	Twilio.Device.sounds.disconnect(false);
+
+    Twilio.Device.ready(function (device) {
+        console.log("Twilio Client Ready");
+    });
+
+    Twilio.Device.error(function (error) {
+		console.log(error);
+        $("#log").text("Error: " + error.message);
+    });
+
+    Twilio.Device.connect(function (conn) {
+		console.log("Twilio Client Connected");
+		status = "active";
+        $("#room").text("Connected: {{room}}");
+		console.log("Conn Status = " + conn.status());
+		var sound = document.getElementById("sound1");
+		sound.Play();
+	});
+
+	Twilio.Device.disconnect(function (conn) {
+		console.log("Twilio Client Disconnected");
+		status = "idle";
+        $("#room").text("Idle: {{room}}");
+    });
+
+	function connect(){
+		conn = Twilio.Device.connect({
+			  room: "{{room}}",
+			  user: "{{user}}"
+			});
+	}
+
+	function StartIdleTimer(){
+		timeoutstate = "set";
+		timeout=setTimeout(function(){
+			conn.disconnect();
+			timeoutstate = "cleared";
+			},45000);
+		console.log("Idle Timeout Started");
+	}
+
+
+	function ptt_on(){
+		mode = "tx";
+		if (status == 'idle')
+		  {
+				console.log("Status is idle connecting");
+				connect();
+		  }
+		else
+		  {
+				console.log("Status is active");
+				conn.unmute();
+				var sound = document.getElementById("sound1");
+				sound.Play();
+		  }
+		if (timeoutstate == 'set') {
+			clearTimeout(timeout);
+			timeoutstate = "cleared";
+			console.log("Timeout Cleared");
+		}
+	}	
+
+	function ptt_off(){
+		conn.mute()
+		var sound = document.getElementById("sound2");
+		sound.Play();
+		StartIdleTimer();
+		mode = "rx";
+	}
+
+	</script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="room"></div>
+		<div id="talking"></div>
+		<button class="ptt" id="ptt" onmousedown="ptt_on()" onmouseup="ptt_off()">PUSH TO TALK</button>
+		</ul>
+		<div id=log></div>
+		<embed src="static/chirp.mp3" autostart="false" width="0" height="0" id="sound1" enablejavascript="true" />
+		<embed src="static/over.mp3" autostart="false" width="0" height="0" id="sound2" enablejavascript="true" />
+
+
+		<footer>
+			<p>Created by <a href="http://sammachin.com:">Sam Machin</a></p>
+		</footer>
+	</div>
+
+</body> 
+</html>
+
+
