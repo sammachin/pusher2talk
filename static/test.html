@@ -79,6 +79,7 @@
 
 	function ptt_on(){
 		mode = "tx";
+		console.log("Mode: TX");
 		if (status == 'idle')
 		  {
 				console.log("Status is idle connecting");
@@ -104,6 +105,18 @@
 		sound.Play();
 		StartIdleTimer();
 		mode = "rx";
+		console.log("Mode: RX");
+	}
+	$(function() {
+	  $(document).keyup(function(evt) {
+	    if (evt.keyCode == 32) {
+	      ptt_off();
+	    }
+	  }).keydown(function(evt) {
+	    if (evt.keyCode == 32) {
+	      ptt_on();
+	    }
+	  });
 	}
 
 	</script>
