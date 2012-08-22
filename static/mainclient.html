@@ -106,11 +106,9 @@
 
     Twilio.Device.setup('{{token}}');
 
-	Twilio.Device.sounds.outgoing(false);
-	
-	Twilio.Device.sounds.disconnect(false);
-
     Twilio.Device.ready(function (device) {
+		device.sounds.outgoing(false);
+		device.sounds.disconnect(false);
         console.log("Twilio Client Ready");
     });
 
