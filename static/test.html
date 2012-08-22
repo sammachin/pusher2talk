@@ -29,10 +29,6 @@
 
     Twilio.Device.setup('{{token}}');
 
-	//Twilio.Device.sounds.outgoing(false);
-	
-	//Twilio.Device.sounds.disconnect(false);
-
     Twilio.Device.ready(function (device) {
 		device.sounds.outgoing(false);
 		device.sounds.disconnect(false);
@@ -107,7 +103,7 @@
 		mode = "rx";
 		console.log("Mode: RX");
 	}
-	$(function() {
+	
 	  $(document).keyup(function(evt) {
 	    if (evt.keyCode == 32) {
 	      ptt_off();
@@ -117,8 +113,7 @@
 	      ptt_on();
 	    }
 	  });
-	}
-
+	
 	</script>
 
 </head>

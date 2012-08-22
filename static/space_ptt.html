@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+<title>VoxIRCTest</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript">
+	var mode;
+
+	function ptt_on(){
+		mode = "tx";
+		console.log("Mode: TX");
+	}	
+
+	function ptt_off(){
+		mode = "rx";
+		console.log("Mode: RX");
+	}
+	
+	down = {};
+	$(document).keydown(function(event){
+	     var keycode = (event.keyCode ? event.keyCode : event.which);
+	     if(keycode == '32'){
+	          if (down['32'] == null) { // first press
+	              ptt_on();
+	              down['32'] = true; // record that the key's down
+	          }
+	     } 
+	   })
+	
+	$(document).keyup(function(event) {
+	     var keycode = (event.keyCode ? event.keyCode : event.which);
+	     down[keycode] = null;
+		 ptt_off();
+	})
+	
+	</script>
+
+</head>
+<body>
+	<button class="ptt" id="ptt" onmousedown="ptt_on()" onmouseup="ptt_off()">PUSH TO TALK</button>
+</body> 
+</html>
+
+

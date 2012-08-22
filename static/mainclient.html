@@ -183,6 +183,23 @@ function ptt_off(){
 	mode = "rx";
 }
 
+down = {};
+$(document).keydown(function(event){
+     var keycode = (event.keyCode ? event.keyCode : event.which);
+     if(keycode == '32'){
+          if (down['32'] == null) { // first press
+              ptt_on();
+              down['32'] = true; // record that the key's down
+          }
+     } 
+   })
+
+$(document).keyup(function(event) {
+     var keycode = (event.keyCode ? event.keyCode : event.which);
+     down[keycode] = null;
+	 ptt_off();
+})
+
 </script>
 
 
