@@ -39,6 +39,11 @@
 			  	connect();
 				conn.mute()
 			  }
+			if (timeoutstate == 'set') {
+				clearTimeout(timeout);
+				timeoutstate = "cleared";
+				console.log("Timeout Cleared");
+			}
 			document.getElementById('talking').innerHTML = "Speaking:" + data.user;
 			document.getElementById('ptt').style.visibility = 'hidden';
 	   		}
