@@ -35,8 +35,15 @@ pusher.secret = creds.pusher_secret
 
 def adduser(room, user):
 	data = json.loads(mc.get(room))
-	data['users'].append(user)
-	mc.set(room, json.dumps(data))
+	if data != None:
+		data['users'].append(user)
+		mc.set(room, json.dumps(data))
+	else:
+		data = {}
+		data['users'] = []
+		mc.set(room, json.dumps(data))
+		
+		
 
 def deluser(room, user):
 	data = json.loads(mc.get(room))
