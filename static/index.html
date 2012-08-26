@@ -16,7 +16,7 @@
 
 	<script>
 	function doConnect(){
-		var url = "http://voxirc.sammachin.com/main?id="+ document.forms.join.room.value + "." + document.forms.join.user.value;
+		var url = "http://voxirc.sammachin.com/main?id="+ document.forms.join.channel.value + "." + document.forms.join.user.value;
 		window.open(url);
 	}
 	</script>
@@ -30,8 +30,8 @@
 		<section>
 			<form name="join">
 				<fieldset><legend>Join</legend>
-					<label for="room">Channel</label>
-					<input type="text" id="room" size="12" placeholder="channelname" />
+					<label for="channel">Channel</label>
+					<input type="text" id="channel" size="12" placeholder="channelname" />
 					<label>Username</label>
 					<input type="text" id="user" size="12" placeholder="username" />
 				<input type="submit" value="Connect" onclick="doConnect()">
