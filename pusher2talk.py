@@ -55,6 +55,24 @@ def getusers(room):
 	
 
 
+
+class twiliotest(object):
+	def start(self, var=None, **params):
+		r = twiml.Response()
+		r.say("Please record a short message after the tone, it will then be played back to you")
+		r.record(action="http://voxirc.sammachin.com/twiliotest/recorded", maxLength="6")
+		return str(r)
+	def recorded(self, var=None, **params):
+		r = twiml.Response()
+		r.say("Thankyou")
+		r.play(url=str(urllib.unquote(cherrypy.request.params['RecordingUrl'])))
+		r.say("Goodbye")
+		return str(r)
+	start.exposed = True
+	recorded.exposed = True
+		
+		
+		
 class start(object):
 	twiliotest = twiliotest()
 	def index(self):
@@ -159,20 +177,7 @@ class start(object):
 	leaveroom.exposed = True
 	getusers.exposed = True
 
-class twiliotest(object):
-	def start(self, var=None, **params):
-		r = twiml.Response()
-		r.say("Please record a short message after the tone, it will then be played back to you")
-		r.record(action="http://voxirc.sammachin.com/twiliotest/recorded", maxLength="6")
-		return str(r)
-	def recorded(self, var=None, **params):
-		r = twiml.Response()
-		r.say("Thankyou")
-		r.play(url=str(urllib.unquote(cherrypy.request.params['RecordingUrl'])))
-		r.say("Goodbye")
-		return str(r)
-	start.exposed = True
-	recorded.exposed = True
+
 		
 
 cherrypy.config.update('app.cfg')
