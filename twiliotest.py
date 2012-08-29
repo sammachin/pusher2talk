@@ -4,7 +4,7 @@ import urllib
 
 class start(object):
 	def start(self, var=None, **params):
-		raise cherrypy.HTTPRedirect("go", 307)
+		raise cherrypy.HTTPRedirect("go", 302)
 	def go(self, var=None, **params):
 		r = twiml.Response()
 		r.say("Please record a short message after the tone, it will then be played back to you")

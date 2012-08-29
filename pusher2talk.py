@@ -17,7 +17,6 @@ import hmac
 import hashlib
 import memcache
 import json
-from twiliotest import *
 
 mc = memcache.Client(['127.0.0.1:11211'], debug=0)
 
@@ -174,7 +173,6 @@ class twiliotest(object):
 		return str(r)
 	start.exposed = True
 	recorded.exposed = True
-		
 		
 
 cherrypy.config.update('app.cfg')
