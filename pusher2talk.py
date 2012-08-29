@@ -130,7 +130,9 @@ class start(object):
 		room = str(urllib.unquote(cherrypy.request.params['room']))
 		user = str(urllib.unquote(cherrypy.request.params['user']))
 		if room == "welcome-test" and user == "guest-test":
-			raise cherrypy.HTTPRedirect("/twiliotest/start", 302)
+			r = twiml.Response()
+			r.say("Please record a short message after the tone, it will then be played back to you")
+			r.record(action="http://voxirc.sammachin.com/twiliotest/recorded", maxLength="6")
 		else:
 			print user + " entered " + room
 			leaveurl= "http://ec2.sammachin.com/pusher2talk/leaveroom?room={0}&user={1}".format(room, user)
