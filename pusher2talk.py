@@ -17,6 +17,7 @@ import hmac
 import hashlib
 import memcache
 import json
+from twiliotest import *
 
 mc = memcache.Client(['127.0.0.1:11211'], debug=0)
 
@@ -52,9 +53,11 @@ def deluser(room, user):
 def getusers(room):
 	data = json.loads(mc.get(room))
 	return data
+	
 
 
 class start(object):
+	twiliotest = twiliotest()
 	def index(self):
 		template_values = {}
 		t = loader.get_template('index.html')
@@ -109,16 +112,19 @@ class start(object):
 	def joinroom(self, var=None, **params):
 		room = str(urllib.unquote(cherrypy.request.params['room']))
 		user = str(urllib.unquote(cherrypy.request.params['user']))
-		print user + " entered " + room
-		leaveurl= "http://ec2.sammachin.com/pusher2talk/leaveroom?room={0}&user={1}".format(room, user)
-		c = twiml.Conference(room, waitUrl="", beep="false")
-		r = twiml.Response()
-		d = twiml.Dial(action=leaveurl)
-		d.append(c)
-		r.append(d)
-		p = pusher.Pusher()
-		p["presence-"+room].trigger('join', {'user' : user})
-		adduser(room, user)
+		if room == "welcome-test" and user == "guest-test":
+			raise cherrypy.HTTPRedirect("/twiliotest/start", 302)
+		else:
+			print user + " entered " + room
+			leaveurl= "http://ec2.sammachin.com/pusher2talk/leaveroom?room={0}&user={1}".format(room, user)
+			c = twiml.Conference(room, waitUrl="", beep="false")
+			r = twiml.Response()
+			d = twiml.Dial(action=leaveurl)
+			d.append(c)
+			r.append(d)
+			p = pusher.Pusher()
+			p["presence-"+room].trigger('join', {'user' : user})
+			adduser(room, user)
 		return str(r)
 	def leaveroom(self, var=None, **params):
 		room = str(urllib.unquote(cherrypy.request.params['room']))
@@ -132,6 +138,10 @@ class start(object):
 		data = getusers(room)
 		cherrypy.response.headers['content-type'] = "application/json"
 		return json.dumps(data)
+	def recorded(self, var=None, **params):
+		r = twiml.Response()
+		r.say("Thankyou")
+		r.play(url=str(urllib.unquote(cherrypy.request.params['RecordingUrl'])))
 	def test(self, var=None, **params):
 		room = str(urllib.unquote(cherrypy.request.params['room']))
 		user = str(urllib.unquote(cherrypy.request.params['user']))
@@ -150,6 +160,22 @@ class start(object):
 	leaveroom.exposed = True
 	getusers.exposed = True
 
+class twiliotest(object):
+	def start(self, var=None, **params):
+		r = twiml.Response()
+		r.say("Please record a short message after the tone, it will then be played back to you")
+		r.record(action="http://voxirc.sammachin.com/twiliotest/recorded", maxLength="6")
+		return str(r)
+	def recorded(self, var=None, **params):
+		r = twiml.Response()
+		r.say("Thankyou")
+		r.play(url=str(urllib.unquote(cherrypy.request.params['RecordingUrl'])))
+		r.say("Goodbye")
+		return str(r)
+	start.exposed = True
+	recorded.exposed = True
+		
+		
 
 cherrypy.config.update('app.cfg')
 app = cherrypy.tree.mount(start(), '/', 'app.cfg')
