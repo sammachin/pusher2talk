@@ -4,7 +4,7 @@ PyJWT==0.1.2
 PyRSS2Gen==1.0.0
 Pygments==1.5
 Twisted==11.0.0
-altgraph==0.7.1
+altgraph==0.7.2
 bdist-mpkg==0.4.4
 bonjour-py==0.3
 boto==2.5.2
