@@ -17,6 +17,8 @@ import hmac
 import hashlib
 import memcache
 import json
+from cherrypy.process import servers
+
 
 mc = memcache.Client(['127.0.0.1:12111'], debug=0)
 
