@@ -1,3 +1,4 @@
+import os
 import re
 import cherrypy
 import urllib
@@ -23,14 +24,14 @@ mc = memcache.Client(['127.0.0.1:11211'], debug=0)
 settings.configure(TEMPLATE_DIRS = ( "/server/pusher2talk/static",))
 
 #Twilio Details
-account = creds.twilio_account
-token = creds.twilio_token
-application_sid = creds.twilio_application_sid
+account = os.environ["twilio_account"]
+token = os.environ["twilio_token"]
+application_sid = os.environ["twilio_application_sid"]
 
 #Pusher Details
-pusher.app_id = creds.pusher_app_id
-pusher.key = creds.pusher_key
-pusher.secret = creds.pusher_secret
+pusher.app_id = os.environ["pusher_app_id"]
+pusher.key = os.environ["pusher_key"]
+pusher.secret = os.environ["pusher_secret"]
 
 
 def adduser(room, user):
