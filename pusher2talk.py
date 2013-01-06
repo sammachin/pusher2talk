@@ -12,7 +12,6 @@ import time
 import json
 import urllib2
 from twilio.util import TwilioCapability
-import creds
 import pusher
 import hmac
 import hashlib
