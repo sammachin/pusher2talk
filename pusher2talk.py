@@ -18,7 +18,7 @@ import hashlib
 import memcache
 import json
 
-mc = memcache.Client(['127.0.0.1'], debug=0)
+mc = memcache.Client(['127.0.0.1:12111'], debug=0)
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 settings.configure(TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT,'static/')))
