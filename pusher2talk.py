@@ -18,9 +18,15 @@ import hashlib
 import memcache
 import json
 
-mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+mc = memcache.Client(['127.0.0.1'], debug=0)
 
-settings.configure(TEMPLATE_DIRS = ( "/server/pusher2talk/static",))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+settings.configure(TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT,'static/')))
+
+def fake_wait_for_occupied_port(host, port): 
+	return
+
+servers.wait_for_occupied_port = fake_wait_for_occupied_port
 
 #Twilio Details
 account = os.environ["twilio_account"]
@@ -181,16 +187,6 @@ class start(object):
 
 
 		
-
-cherrypy.config.update('app.cfg')
-app = cherrypy.tree.mount(start(), '/', 'app.cfg')
-cherrypy.config.update({'server.socket_host': '0.0.0.0',
-                        'server.socket_port': 9041})
-
-if hasattr(cherrypy.engine, "signal_handler"):
-    cherrypy.engine.signal_handler.subscribe()
-if hasattr(cherrypy.engine, "console_control_handler"):
-    cherrypy.engine.console_control_handler.subscribe()
-cherrypy.engine.start()
-cherrypy.engine.block()
-
+cherrypy.config.update({'server.socket_host': '0.0.0.0',})
+cherrypy.config.update({'server.socket_port': int(os.environ.get('PORT', '5000')),})
+cherrypy.quickstart(HelloWorld())
