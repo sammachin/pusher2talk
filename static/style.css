@@ -154,6 +154,9 @@ pre {
   font-size: 1.4em; }
 
 /*headers*/
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 20px; }
+
 h1 {
   font-size: 4em; }
 
@@ -299,7 +302,7 @@ button {
   color: #f1f4f4;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.7), 1px 1px 1px rgba(255, 255, 255, 0.3);
   display: block;
-  margin: 0px 0px 40px;
+  margin: 40px 0px 40px;
   padding: 23px 37px 25px 35px;
   width: 380px;
   cursor: pointer;
@@ -327,11 +330,3 @@ button:active {
   background-image: -ms-linear-gradient(273deg, #ff3333 50%, #ff4d4d 60%);
   background-image: linear-gradient(273deg, #ff3333 50%, #ff4d4d 60%);
   box-shadow: inset 3px 4px 3px 2px rgba(92, 10, 10, 0.55), inset 0px 0px 1px 1px rgba(138, 15, 15, 0.9), inset -1px -1px 2px 3px rgba(230, 25, 25, 0.9), inset -2px -2px 1px 3px rgba(255, 255, 255, 0.8), inset 0px 0px 2px 7px rgba(235, 71, 71, 0.8), inset 0px 0px 3px 10px rgba(230, 25, 25, 0.9), 0px 0px 3px 2px rgba(184, 20, 20, 0.9), 0px 0px 2px 6px rgba(230, 25, 25, 0.9), -1px -1px 1px 6px rgba(255, 255, 255, 0.9), 0px 0px 2px 11px rgba(230, 25, 25, 0.9), 0px 0px 1px 12px rgba(184, 20, 20, 0.9), 1px 3px 14px 14px rgba(0, 0, 0, 0.4); }
-
-
-#room {
- position:relative;
- top:-20px;
-}
-
-

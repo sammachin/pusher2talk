@@ -161,7 +161,7 @@ pre {font-size:1.4em;}
 
 /*headers*/
 header {}
-h1, h2, h3, h4, h5, h6 {}
+h1, h2, h3, h4, h5, h6 {margin-bottom:20px;}
 h1 {font-size:4em;}
 h2 {font-size:3.2em;}
 h3 {font-size:2.6em;}
@@ -255,7 +255,7 @@ footer {padding-top:10px; text-align:right;}
 button {
   font-family:$font; font-size:3.8em; text-align:center;
   color:lighten($grey,70%); text-shadow:-1px -1px 1px hsla(350,0%,0%,0.7), 1px 1px 1px hsla(350,0%,100%,0.3);
-  display:block; margin:0px 0px 40px; padding:23px 37px 25px 35px; width:380px;
+  display:block; margin:40px 0px 40px; padding:23px 37px 25px 35px; width:380px;
   cursor:pointer;
   background-color:invert($colour);
   background-image: -webkit-linear-gradient(273deg,lighten($buttonColour,10%) 30%, $buttonColour 40%);
