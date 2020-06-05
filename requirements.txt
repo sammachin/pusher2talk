@@ -1,5 +1,5 @@
 CherryPy==3.2.2
-Django==1.4.1
+Django==1.11.29
 PyJWT==0.1.2
 httplib2==0.7.4
 pusher==0.6
